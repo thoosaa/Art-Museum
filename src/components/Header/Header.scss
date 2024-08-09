@@ -4,7 +4,6 @@
 .header {
   background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
   @include mixins.flex-space;
-  padding: 32px 23px;
 
   &__list {
     display: none;
@@ -13,7 +12,7 @@
   &__item {
     @include mixins.flex-space;
     color: variables.$white;
-    font-family: variables.$lexend;
+    font-family: 'Lexend Deca';
     gap: 4px;
 
     &--bigger {
@@ -112,16 +111,8 @@
   }
 }
 
-@media (min-width: 575.98px) {
-  .header {
-    padding: 32px calc(50% - 290px);
-  }
-}
-
 @media (min-width: 767.98px) {
   .header {
-    padding: 32px calc(50% - 360px);
-
     &__list {
       display: flex;
     }
@@ -133,17 +124,5 @@
     &__burger {
       display: none;
     }
-  }
-}
-
-@media (min-width: 991.98px) {
-  .header {
-    padding: 32px calc(50% - 480px);
-  }
-}
-
-@media (min-width: 1371.98px) {
-  .header {
-    padding: 32px calc(50% - 640px);
   }
 }
