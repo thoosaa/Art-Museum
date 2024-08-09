@@ -1,0 +1,24 @@
+@use '../../assets/styles/mixins';
+@use '../../assets/styles/variables';
+
+.main {
+  margin: 88px 0;
+}
+.page-title {
+  font-family: 'Lexend Deca';
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 80px;
+  text-align: center;
+
+  &-highlight {
+    color: variables.$orange;
+  }
+
+  @media (min-width: 991.98px) {
+    &-highlight::after {
+      content: '';
+      display: block;
+    }
+  }
+}

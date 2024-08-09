@@ -5,7 +5,7 @@
       "@components/*": ["./components/*"],
       "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
-      "@pages/*": ["./assets/*"]
+      "@pages/*": ["./pages/*"]
     },
     "jsx": "react-jsx"
   },
