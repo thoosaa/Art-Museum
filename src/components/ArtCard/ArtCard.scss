@@ -1,0 +1,42 @@
+@use '../../assets/styles/mixins';
+@use '../../assets/styles/variables';
+
+.gallery {
+  display: flex;
+  margin-top: 40px;
+}
+
+.art-block {
+  position: relative;
+
+  &__description {
+    @include mixins.flex-space;
+    background-color: variables.$white;
+    position: absolute;
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    padding: 17px 24px;
+  }
+
+  &__add-bookmark {
+    @include mixins.flex-center;
+    border-radius: 50%;
+    background-color: variables.$light-orange;
+    padding: 18px;
+  }
+
+  &__title {
+    @include mixins.font('Lexend Deca', variables.$gray, 18, 500);
+  }
+
+  &__author {
+    @include mixins.font('Lexend Deca', variables.$yellow, 16);
+    padding: 5px 0 12px 0;
+  }
+
+  &__availability {
+    @include mixins.font('Lexend Deca', variables.$gray, 16, 700);
+  }
+}

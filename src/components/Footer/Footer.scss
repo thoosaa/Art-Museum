@@ -3,4 +3,5 @@
 
 .footer {
   @include mixins.flex-space;
+  background-color: variables.$white;
 }

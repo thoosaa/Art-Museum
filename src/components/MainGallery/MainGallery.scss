@@ -1,0 +1,17 @@
+@use '../../assets/styles/mixins';
+@use '../../assets/styles/variables';
+
+.section__subtitle {
+  color: variables.$yellow;
+}
+
+.section__title {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.section__subtitle,
+.section__title {
+  font-family: 'Lexend Deca';
+  text-align: center;
+}

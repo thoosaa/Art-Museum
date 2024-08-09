@@ -9,3 +9,10 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin font($font-familty, $color, $font-size, $font-weight: 400) {
+  font-family: $font-familty;
+  color: $color;
+  font-weight: $font-weight;
+  font-size: $font-size + px;
+}

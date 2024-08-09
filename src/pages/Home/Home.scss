@@ -22,3 +22,25 @@
     }
   }
 }
+
+.form {
+  @include mixins.flex-space;
+  max-width: 762px;
+  flex: 1 1 auto;
+  background-color: variables.$light-gray;
+  margin: 72px auto 120px auto;
+  padding: 16px;
+  border-radius: 16px;
+
+  &.input-error {
+    border: 1px solid variables.$red;
+  }
+
+  &__field {
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    width: 100%;
+    background-color: inherit;
+  }
+}
