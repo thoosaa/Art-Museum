@@ -27,7 +27,7 @@ export default function Header() {
         <ul className="header__list">
           <li className="header__item">
             <img src={bookmark} alt="Bookmark" className="header__icon" />
-            <a href="" className="header__link">
+            <a href="/favorites" className="header__link">
               Your favorites
             </a>
           </li>

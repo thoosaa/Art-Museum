@@ -8,6 +8,7 @@ import Footer from '@components/Footer/Footer';
 import MainGallery from '@components/MainGallery/MainGallery';
 import OtherGallery from '@components/OtherGalley/OtherGallery';
 import Pagination from '@components/Pagination/Pagination';
+import Loader from '@components/Loader/Loader';
 import search_icon from '@assets/images/search.svg';
 import './Home.scss';
 
@@ -19,6 +20,7 @@ export default function Home() {
   const [art, setArt] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     fetchArt();
@@ -26,6 +28,7 @@ export default function Home() {
 
   const fetchArt = async (query: string = '') => {
     try {
+      setIsLoading(true);
       const res = await axios.get(`https://api.artic.edu/api/v1/artworks/search`, {
         params: {
           q: query,
@@ -33,8 +36,10 @@ export default function Home() {
           from: (currentPage - 1) * 5,
         },
       });
+
       setTotal(res.data.pagination.total);
       setArt(res.data.data.map((item) => item.id));
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -72,9 +77,19 @@ export default function Home() {
           )}
         </Formik>
 
-        <MainGallery art_ids={art} />
+        <section>
+          <h3 className="section__subtitle">Topics for you</h3>
+          <h2 className="section__title">Our special gallery</h2>
+          {isLoading ? <Loader /> : <MainGallery art_ids={art} />}
+        </section>
+
         <Pagination total={total > 990 ? 990 : total} currentPage={currentPage} onPageChange={handlePageChange} />
-        <OtherGallery />
+
+        <section className="section-other-gallery">
+          <h3 className="section__subtitle">Here some more</h3>
+          <h2 className="section__title">Other works for you</h2>
+          <OtherGallery />
+        </section>
       </main>
       <Footer />
     </>
