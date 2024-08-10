@@ -1,6 +1,10 @@
 @use '../../assets/styles/mixins';
 @use '../../assets/styles/variables';
 
+.section-other-gallery {
+  margin-top: 154px;
+}
+
 .other-gallery {
   @include mixins.flex-center;
   margin-top: 40px;

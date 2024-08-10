@@ -7,6 +7,7 @@ import Header from '@components/Header/Header';
 import Footer from '@components/Footer/Footer';
 import MainGallery from '@components/MainGallery/MainGallery';
 import OtherGallery from '@components/OtherGalley/OtherGallery';
+import Pagination from '@components/Pagination/Pagination';
 import search_icon from '@assets/images/search.svg';
 import './Home.scss';
 
@@ -16,10 +17,12 @@ const artSchema = z.object({
 
 export default function Home() {
   const [art, setArt] = useState<string[]>([]);
+  const [total, setTotal] = useState<number>(10);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     fetchArt();
-  }, []);
+  }, [currentPage]);
 
   const fetchArt = async (query: string = '') => {
     try {
@@ -27,14 +30,19 @@ export default function Home() {
         params: {
           q: query,
           size: 5,
-          from: 1,
+          from: (currentPage - 1) * 5,
         },
       });
-
+      setTotal(res.data.pagination.total);
       setArt(res.data.data.map((item) => item.id));
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    console.log(page);
   };
 
   return (
@@ -65,6 +73,7 @@ export default function Home() {
         </Formik>
 
         <MainGallery art_ids={art} />
+        <Pagination total={total > 990 ? 990 : total} currentPage={currentPage} onPageChange={handlePageChange} />
         <OtherGallery />
       </main>
       <Footer />

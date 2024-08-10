@@ -21,7 +21,7 @@ export default function OtherGallery() {
   };
 
   return (
-    <section>
+    <section className="section-other-gallery">
       <h3 className="section__subtitle">Here some more</h3>
       <h2 className="section__title">Other works for you</h2>
       <div className="other-gallery">
