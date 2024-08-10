@@ -1,21 +1,18 @@
 @use '../../assets/styles/mixins';
 @use '../../assets/styles/variables';
 
-.gallery {
-  display: flex;
-  margin-top: 40px;
-}
-
 .art-block {
   position: relative;
+  height: auto;
+  margin-bottom: 68px;
 
   &__description {
     @include mixins.flex-space;
     background-color: variables.$white;
     position: absolute;
-    bottom: -8%;
+    bottom: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 50%);
     width: 86%;
     padding: 17px 24px;
   }
@@ -29,6 +26,10 @@
 
   &__title {
     @include mixins.font('Lexend Deca', variables.$gray, 18, 500);
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__author {

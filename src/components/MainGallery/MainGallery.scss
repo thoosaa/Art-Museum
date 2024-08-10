@@ -1,6 +1,13 @@
 @use '../../assets/styles/mixins';
 @use '../../assets/styles/variables';
 
+.gallery {
+  @include mixins.flex-center;
+  margin-top: 40px;
+  gap: 4%;
+  flex-wrap: wrap;
+}
+
 .section__subtitle {
   color: variables.$yellow;
 }

@@ -6,12 +6,36 @@ import Footer from '@components/Footer/Footer';
 import search_icon from '@assets/images/search.svg';
 import './Home.scss';
 import MainGallery from '@components/MainGallery/MainGallery';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const artSchema = z.object({
   art: z.string().min(1),
 });
 
 export default function Home() {
+  const [art, setArt] = useState<string[]>([]);
+
+  useEffect(() => {
+    fetchArt();
+  }, []);
+
+  const fetchArt = async (query: string = '') => {
+    try {
+      const res = await axios.get(`https://api.artic.edu/api/v1/artworks/search`, {
+        params: {
+          q: query,
+          size: 5,
+          from: 1,
+        },
+      });
+
+      setArt(res.data.data.map((item) => item.id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -26,7 +50,7 @@ export default function Home() {
           }}
           validate={withZodSchema(artSchema)}
           onSubmit={(value) => {
-            console.log('submit', value);
+            fetchArt(value.art);
           }}
         >
           {({ errors, touched }) => (
@@ -39,7 +63,7 @@ export default function Home() {
           )}
         </Formik>
 
-        <MainGallery />
+        <MainGallery art_ids={art} />
       </main>
       <Footer />
     </>

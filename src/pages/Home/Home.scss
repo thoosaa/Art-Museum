@@ -5,9 +5,7 @@
   margin: 88px 0;
 }
 .page-title {
-  font-family: 'Lexend Deca';
-  font-size: 64px;
-  font-weight: 700;
+  @include mixins.font('Lexend Deca', variables.$gray, 64, 700);
   line-height: 80px;
   text-align: center;
 
