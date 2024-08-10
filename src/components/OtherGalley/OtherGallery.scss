@@ -1,0 +1,9 @@
+@use '../../assets/styles/mixins';
+@use '../../assets/styles/variables';
+
+.other-gallery {
+  @include mixins.flex-center;
+  margin-top: 40px;
+  gap: 16px;
+  flex-wrap: wrap;
+}

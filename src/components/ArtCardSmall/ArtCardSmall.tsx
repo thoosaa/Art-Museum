@@ -1,7 +1,6 @@
-import './ArtCard.scss';
-//import image from '@assets/images/image 1.png';
-import bookmark from '@assets/images/bookmark-orange.svg';
 import { useEffect, useState } from 'react';
+import './ArtCardSmall.scss';
+import bookmark from '@assets/images/bookmark-orange.svg';
 import axios from 'axios';
 
 interface ArtPieceInfo {
@@ -10,9 +9,9 @@ interface ArtPieceInfo {
   image_id: string;
 }
 
-type ArtCardProps = { art_id: string };
+type ArtCardPropsSmall = { art_id: string };
 
-export default function ArtCard({ art_id }: ArtCardProps) {
+export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo>({
     title: '',
     artist: '',
@@ -37,23 +36,24 @@ export default function ArtCard({ art_id }: ArtCardProps) {
   }, [art_id]);
 
   return (
-    <figure className="art-block">
+    <figure className="small-art-block">
       <img
-        className="art-block__image"
+        className="small-art-block__image"
         alt="Picture"
         src={`https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`}
-        width="305"
+        width="80"
+        height="80"
       />
-      <figcaption className="art-block__description">
-        <div className="art-block__info">
+      <figcaption>
+        <div className="small-art-block__info">
           <p className="art-block__title">{artPieceInfo.title}</p>
           <p className="art-block__author">{artPieceInfo.artist}</p>
           <p className="art-block__availability">Public</p>
         </div>
-        <button className="art-block__add-bookmark">
-          <img src={bookmark} alt="Bookmark" width="24" />
-        </button>
       </figcaption>
+      <button className="art-block__add-bookmark">
+        <img src={bookmark} alt="Bookmark" width="24" />
+      </button>
     </figure>
   );
 }

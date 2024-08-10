@@ -4,7 +4,7 @@
 .art-block {
   position: relative;
   height: auto;
-  margin-bottom: 68px;
+  margin-bottom: 75px;
 
   &__description {
     @include mixins.flex-space;
@@ -22,12 +22,13 @@
     border-radius: 50%;
     background-color: variables.$light-orange;
     padding: 18px;
+    margin-left: auto;
   }
 
   &__title {
     @include mixins.font('Lexend Deca', variables.$gray, 18, 500);
     display: -webkit-box;
-    line-clamp: 2;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

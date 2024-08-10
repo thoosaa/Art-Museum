@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { z } from 'zod';
 import { withZodSchema } from 'formik-validator-zod';
+import axios from 'axios';
 import Header from '@components/Header/Header';
 import Footer from '@components/Footer/Footer';
+import MainGallery from '@components/MainGallery/MainGallery';
+import OtherGallery from '@components/OtherGalley/OtherGallery';
 import search_icon from '@assets/images/search.svg';
 import './Home.scss';
-import MainGallery from '@components/MainGallery/MainGallery';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 const artSchema = z.object({
   art: z.string().min(1),
@@ -64,6 +65,7 @@ export default function Home() {
         </Formik>
 
         <MainGallery art_ids={art} />
+        <OtherGallery />
       </main>
       <Footer />
     </>

@@ -3,7 +3,7 @@
 
 .gallery {
   @include mixins.flex-center;
-  margin-top: 40px;
+  margin: 40px 0 174px 0;
   gap: 4%;
   flex-wrap: wrap;
 }

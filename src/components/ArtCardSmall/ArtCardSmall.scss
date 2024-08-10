@@ -1,0 +1,15 @@
+@use '../../assets/styles/mixins';
+@use '../../assets/styles/variables';
+
+.small-art-block {
+  @include mixins.flex-left;
+  gap: 16px;
+  border: 1px solid #f0f1f1;
+  background-color: variables.$white;
+  padding: 16px;
+  width: 416px;
+
+  &__image {
+    object-fit: cover;
+  }
+}
