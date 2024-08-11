@@ -24,6 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchArt();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const fetchArt = async (query: string = '') => {

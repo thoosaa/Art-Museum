@@ -3,11 +3,13 @@ import './ArtCardSmall.scss';
 import bookmark from '@assets/images/bookmark-orange.svg';
 import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface ArtPieceInfo {
   title: string;
   artist: string;
   image_id: string;
+  is_public: boolean;
 }
 
 type ArtCardPropsSmall = { art_id: string };
@@ -18,7 +20,9 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
     title: '',
     artist: '',
     image_id: '',
+    is_public: false,
   });
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchArtPiece = async () => {
@@ -29,6 +33,7 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
           title: res.data.data.title,
           artist: res.data.data.artist_title,
           image_id: res.data.data.image_id,
+          is_public: res.data.data.is_public_domain,
         });
       } catch (error) {
         console.error('Error fetching art piece:', error);
@@ -51,7 +56,7 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   };
 
   return (
-    <figure className="small-art-block">
+    <figure className="small-art-block" onClick={() => navigate(`/art/${art_id}`)}>
       <img
         className="small-art-block__image"
         alt="Picture"
@@ -63,7 +68,7 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
         <div className="small-art-block__info">
           <p className="art-block__title">{artPieceInfo.title}</p>
           <p className="art-block__author">{artPieceInfo.artist}</p>
-          <p className="art-block__availability">Public</p>
+          <p className="art-block__availability">{artPieceInfo.is_public ? 'Public' : 'Copywrite'}</p>
         </div>
       </figcaption>
       <button className="art-block__add-bookmark" onClick={addRemoveArtPiece}>
