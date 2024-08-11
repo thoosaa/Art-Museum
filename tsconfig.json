@@ -20,6 +20,6 @@
     "isolatedModules": true, // Ensure each file can be transpiled separately
     "allowSyntheticDefaultImports": true // Allow default imports from modules with no default export
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "main.tsx"],
   "exclude": ["node_modules", "dist"]
 }
