@@ -1,6 +1,7 @@
 {
+  "homepage": "https://thoosaa.github.io/Art-Museum",
   "name": "art-museum",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
