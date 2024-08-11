@@ -44,9 +44,9 @@ function Home() {
   return (
     <li className="header__item">
       <img src={home} alt="Home" className="header__icon" />
-      <a href="/" className="header__link">
+      <Link to="/" className="header__link">
         Home
-      </a>
+      </Link>
     </li>
   );
 }
