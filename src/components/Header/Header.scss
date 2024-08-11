@@ -17,6 +17,7 @@
     &--bigger {
       font-size: 35px;
       @include mixins.flex-center;
+      padding: 10px;
     }
   }
 
@@ -114,6 +115,7 @@
   .header {
     &__list {
       display: flex;
+      gap: 16px;
     }
 
     &__burger-list {

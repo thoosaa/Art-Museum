@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import './ArtCardSmall.scss';
 import bookmark from '@assets/images/bookmark-orange.svg';
+import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
 import axios from 'axios';
 
 interface ArtPieceInfo {
@@ -12,6 +13,7 @@ interface ArtPieceInfo {
 type ArtCardPropsSmall = { art_id: string };
 
 export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
+  const [bookmarkImg, setBookmarkImg] = useState<string>(sessionStorage.getItem(art_id) ? bookmark_fill : bookmark);
   const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo>({
     title: '',
     artist: '',
@@ -35,6 +37,19 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
     fetchArtPiece();
   }, [art_id]);
 
+  const addRemoveArtPiece = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (sessionStorage.getItem(art_id)) {
+      console.log('remove existing');
+      sessionStorage.removeItem(art_id);
+      setBookmarkImg(bookmark);
+    } else {
+      console.log('add new');
+      sessionStorage.setItem(art_id, art_id);
+      setBookmarkImg(bookmark_fill);
+    }
+  };
+
   return (
     <figure className="small-art-block">
       <img
@@ -51,8 +66,8 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
           <p className="art-block__availability">Public</p>
         </div>
       </figcaption>
-      <button className="art-block__add-bookmark">
-        <img src={bookmark} alt="Bookmark" width="24" />
+      <button className="art-block__add-bookmark" onClick={addRemoveArtPiece}>
+        <img src={bookmarkImg} alt="Bookmark" width="24" />
       </button>
     </figure>
   );

@@ -18,7 +18,7 @@ const artSchema = z.object({
 
 export default function Home() {
   const [art, setArt] = useState<string[]>([]);
-  const [total, setTotal] = useState<number>(10);
+  const [total, setTotal] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header id={1} />
       <main className="main">
         <h1 className="page-title">
           Let's Find Some <span className="page-title-highlight">Art</span> Here!
