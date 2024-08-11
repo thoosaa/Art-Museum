@@ -6,7 +6,6 @@ import { useEffect, useState, MouseEvent } from 'react';
 import axios from 'axios';
 import bookmark from '@assets/images/bookmark-orange.svg';
 import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
-import no_image from '@assets/images/no-image.svg';
 import getNationality from '@utils/helperFunctions/getNationality';
 
 interface ArtPieceInfo {
@@ -82,14 +81,7 @@ export default function ArtPiece() {
       <Header id={2} />
       <main className="main art-piece">
         <div className="art-piece-image">
-          <img
-            alt="Picture"
-            src={
-              artPieceInfo.image_id
-                ? `https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`
-                : no_image
-            }
-          />
+          <img alt="Picture" src={`https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`} />
           <button className="art-block__add-bookmark art-piece-bookmark" onClick={addRemoveArtPiece}>
             <img src={bookmarkImg} alt="Bookmark" width="24" />
           </button>

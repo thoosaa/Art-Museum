@@ -7,18 +7,18 @@
       "@assets/*": ["./assets/*"],
       "@pages/*": ["./pages/*"]
     },
-    "jsx": "react-jsx", // JSX support for React
-    "target": "ES2015", // ECMAScript 2015 and higher to support modern JS features
-    "module": "ESNext", // Module system for ESNext
-    "esModuleInterop": true, // Enable compatibility with CommonJS modules
-    "skipLibCheck": true, // Skip type checking for declaration files
-    "forceConsistentCasingInFileNames": true, // Ensure consistent file casing
-    "strict": true, // Enable strict type checking
-    "noImplicitAny": true, // Disallow implicit 'any' types
-    "moduleResolution": "node", // Resolve modules using Node.js conventions
-    "resolveJsonModule": true, // Include JSON modules
-    "isolatedModules": true, // Ensure each file can be transpiled separately
-    "allowSyntheticDefaultImports": true // Allow default imports from modules with no default export
+    "jsx": "react-jsx",
+    "target": "ES2015",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "main.tsx"],
   "exclude": ["node_modules", "dist"]
