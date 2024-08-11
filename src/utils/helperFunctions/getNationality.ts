@@ -191,7 +191,7 @@ const nationalities = [
   'Zimbabwean',
 ];
 
-export default function detectNationality(text) {
+export default function detectNationality(text: string) {
   const lowercasedText = text.toLowerCase();
 
   for (const nationality of nationalities) {
