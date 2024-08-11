@@ -31,12 +31,15 @@ export default function Home() {
     },
   });
 
-  function debounce(func, timeout = 300) {
-    let timer;
-    return (...args) => {
+  function debounce<T extends (...args: unknown[]) => void>(
+    func: T,
+    timeout: number = 300,
+  ): (...args: Parameters<T>) => void {
+    let timer: ReturnType<typeof setTimeout>;
+    return (...args: Parameters<T>) => {
       clearTimeout(timer);
       timer = setTimeout(() => {
-        func.apply(this, args);
+        func.apply(null, [...args]);
       }, timeout);
     };
   }
@@ -71,7 +74,7 @@ export default function Home() {
       });
 
       setTotal(res.data.pagination.total);
-      setArt(res.data.data.map((item) => item.id));
+      setArt(res.data.data.map((item: { id: number }) => item.id));
       setIsLoading(false);
     } catch (err) {
       console.log(err);

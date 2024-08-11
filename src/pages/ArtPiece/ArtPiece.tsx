@@ -23,7 +23,7 @@ interface ArtPieceInfo {
 }
 
 export default function ArtPiece() {
-  const params = useParams();
+  const params = useParams<{ artId?: string }>();
   const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo>({
     title: '',
     artist: '',
@@ -37,7 +37,7 @@ export default function ArtPiece() {
     is_public: false,
   });
   const [bookmarkImg, setBookmarkImg] = useState<string>(
-    sessionStorage.getItem(params.artId) ? bookmark_fill : bookmark,
+    sessionStorage.getItem(params.artId ?? '') ? bookmark_fill : bookmark,
   );
 
   useEffect(() => {
@@ -66,13 +66,13 @@ export default function ArtPiece() {
 
   const addRemoveArtPiece = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (sessionStorage.getItem(params.artId)) {
+    if (sessionStorage.getItem(params.artId ?? '')) {
       console.log('remove existing');
-      sessionStorage.removeItem(params.artId);
+      sessionStorage.removeItem(params.artId ?? '');
       setBookmarkImg(bookmark);
     } else {
       console.log('add new');
-      sessionStorage.setItem(params.artId, params.artId);
+      sessionStorage.setItem(params.artId ?? '', params.artId ?? '');
       setBookmarkImg(bookmark_fill);
     }
   };

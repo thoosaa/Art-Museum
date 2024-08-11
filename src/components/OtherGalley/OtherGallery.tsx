@@ -17,8 +17,8 @@ export default function OtherGallery() {
     try {
       setIsLoading(true);
       const res = await axios.get(`https://api.artic.edu/api/v1/artworks?limit=9`);
-      console.log(res.data.data.map((item) => item.id));
-      setArt(res.data.data.map((item) => item.id));
+      console.log(res.data.data.map((item: { id: number }) => item.id));
+      setArt(res.data.data.map((item: { id: number }) => item.id));
       setIsLoading(false);
     } catch (err) {
       console.log(err);
