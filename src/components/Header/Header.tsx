@@ -3,6 +3,7 @@ import museum_logo from '@assets/images/museum-logo.svg';
 import bookmark from '@assets/images/bookmark.svg';
 import home from '@assets/images/home.svg';
 import { useBurgerMenu } from './useBurgerMenu';
+import { Link } from 'react-router-dom';
 
 type HeaderProps = { id: number };
 
@@ -10,9 +11,9 @@ function FavoritesBurger() {
   return (
     <li className="header__item header__item--bigger">
       <img src={bookmark} alt="Bookmark" className="header__icon header__icon--bigger" />
-      <a href="/favorites" className="header__link">
+      <Link to="/favorites" className="header__link">
         Your favorites
-      </a>
+      </Link>
     </li>
   );
 }
@@ -21,9 +22,9 @@ function HomeBurger() {
   return (
     <li className="header__item header__item--bigger">
       <img src={home} alt="Home" className="header__icon header__icon--bigger" />
-      <a href="/" className="header__link">
+      <Link to="/" className="header__link">
         Home
-      </a>
+      </Link>
     </li>
   );
 }
@@ -32,9 +33,9 @@ function Favorites() {
   return (
     <li className="header__item">
       <img src={bookmark} alt="Bookmark" className="header__icon" />
-      <a href="/favorites" className="header__link">
+      <Link to="/favorites" className="header__link">
         Your favorites
-      </a>
+      </Link>
     </li>
   );
 }

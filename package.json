@@ -1,11 +1,12 @@
 {
+  "homepage": "https://thoosaa.github.io/Art-Museum/",
   "name": "art-museum",
   "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "predeploy": "yarn build",
+    "predeploy": "vite build",
     "deploy": "gh-pages -d dist",
     "build": "tsc -b && vite build",
     "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
