@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { useCallback, useEffect, useState } from 'react';
+import { useFormik } from 'formik';
 import { z } from 'zod';
 import { withZodSchema } from 'formik-validator-zod';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import OtherGallery from '@components/OtherGalley/OtherGallery';
 import Pagination from '@components/Pagination/Pagination';
 import Loader from '@components/Loader/Loader';
 import search_icon from '@assets/images/search.svg';
+import abc from '@assets/images/abc.svg';
 import './Home.scss';
 
 const artSchema = z.object({
@@ -21,20 +22,51 @@ export default function Home() {
   const [total, setTotal] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [sort, setSort] = useState<boolean>(false);
+  const formik = useFormik({
+    initialValues: { art: '' },
+    validate: withZodSchema(artSchema),
+    onSubmit: (values) => {
+      fetchArt(values.art);
+    },
+  });
+
+  function debounce(func, timeout = 300) {
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+
+  const debouncedSubmit = useCallback(
+    debounce(() => formik.submitForm(), 1000),
+    [],
+  );
 
   useEffect(() => {
-    fetchArt();
+    if (formik.values.art) {
+      debouncedSubmit();
+    }
+  }, [formik.values.art, debouncedSubmit]);
+
+  useEffect(() => {
+    fetchArt(formik.values.art);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
+  }, [currentPage, sort]);
 
   const fetchArt = async (query: string = '') => {
     try {
       setIsLoading(true);
+      console.log(query);
       const res = await axios.get(`https://api.artic.edu/api/v1/artworks/search`, {
         params: {
           q: query,
           size: 5,
           from: (currentPage - 1) * 5,
+          sort: sort ? 'title.keyword' : '',
         },
       });
 
@@ -59,24 +91,25 @@ export default function Home() {
           Let's Find Some <span className="page-title-highlight">Art</span> Here!
         </h1>
 
-        <Formik
-          initialValues={{
-            art: '',
-          }}
-          validate={withZodSchema(artSchema)}
-          onSubmit={(value) => {
-            fetchArt(value.art);
-          }}
-        >
-          {({ errors, touched }) => (
-            <Form className={`form ${errors.art && touched.art ? 'input-error' : ''}`}>
-              <Field placeholder="Search art, artist, work..." type="text" name="art" className={`form__field`} />
-              <button type="submit">
-                <img src={search_icon} alt="Search" />
-              </button>
-            </Form>
-          )}
-        </Formik>
+        <form className={`form ${formik.errors.art && formik.touched.art ? 'input-error' : ''}`}>
+          <input
+            placeholder="Search art, artist, work..."
+            type="text"
+            name="art"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.art}
+            className="form__field"
+          />
+          <button type="button">
+            <img src={search_icon} alt="Search" />
+          </button>
+        </form>
+
+        <button onClick={() => setSort(!sort)} className={`set-sort-button ${sort ? 'set-sort-button--active' : ''}`}>
+          <img src={abc} />
+          <p> Sort in alphabetical order</p>
+        </button>
 
         <section>
           <h3 className="section__subtitle">Topics for you</h3>

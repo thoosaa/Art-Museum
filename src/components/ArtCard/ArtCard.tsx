@@ -5,6 +5,7 @@ import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
 import { useEffect, useState, MouseEvent } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import no_image from '@assets/images/no-image.svg';
 
 interface ArtPieceInfo {
   title: string;
@@ -61,7 +62,11 @@ export default function ArtCard({ art_id }: ArtCardProps) {
       <img
         className="art-block__image"
         alt="Picture"
-        src={`https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`}
+        src={
+          artPieceInfo.image_id
+            ? `https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`
+            : no_image
+        }
         width="305"
       />
       <figcaption className="art-block__description">
