@@ -56,7 +56,7 @@ export default function Header({ id }: HeaderProps) {
 
   return (
     <>
-      <ul className={`header__burger-list ${isOverlay ? '' : 'overlay'}`}>
+      <ul className={`header__burger-list ${isOverlay ? 'overlay' : ''}`}>
         {id === 1 ? (
           <FavoritesBurger />
         ) : (
@@ -69,7 +69,7 @@ export default function Header({ id }: HeaderProps) {
       <header className="header">
         <img src={museum_logo} alt="Museum logo" className="header__logo" />
 
-        <div className={`header__burger ${isOpen ? '' : 'close'}`} onClick={toggle}>
+        <div className={`header__burger ${isOpen ? 'close' : ''}`} onClick={toggle}>
           <span></span>
         </div>
 
