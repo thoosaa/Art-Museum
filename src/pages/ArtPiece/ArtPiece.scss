@@ -44,6 +44,14 @@
       gap: 40px;
     }
 
+    &-image {
+      @include mixins.flex-center;
+    }
+
+    &-bookmark {
+      right: 7%;
+    }
+
     &-image img {
       width: 85%;
     }

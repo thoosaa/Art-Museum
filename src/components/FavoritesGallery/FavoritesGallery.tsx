@@ -1,5 +1,4 @@
 import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall';
-import './FavoritesGallery.scss';
 
 export default function FavoritesGallery() {
   return (
