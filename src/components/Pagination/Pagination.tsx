@@ -1,21 +1,24 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Pagination.scss';
 
-type PaginationProps = {
+interface PaginationProps {
   total: number;
   currentPage: number;
   onPageChange: (page: number) => void;
-};
+}
 
 export default function Pagination({ total, currentPage, onPageChange }: PaginationProps) {
   const pageSize = 5;
   const pagesToShow = 4;
   const totalPages = Math.ceil(total / pageSize);
 
-  const [currentGroup, setCurrentGroup] = useState(1);
+  const [currentGroup, setCurrentGroup] = useState(Math.ceil(currentPage / pagesToShow));
+
+  useEffect(() => {
+    setCurrentGroup(Math.ceil(currentPage / pagesToShow));
+  }, [currentPage]);
 
   const maxGroups = Math.ceil(totalPages / pagesToShow);
-
   const startPage = (currentGroup - 1) * pagesToShow + 1;
   const endPage = Math.min(startPage + pagesToShow - 1, totalPages);
 
@@ -25,14 +28,14 @@ export default function Pagination({ total, currentPage, onPageChange }: Paginat
 
   const handleNextGroup = () => {
     if (currentGroup < maxGroups) {
-      setCurrentGroup(currentGroup + 1);
+      if (currentPage - 1 < currentGroup * 4) setCurrentGroup(currentGroup + 1);
       onPageChange(currentPage + 1);
     }
   };
 
   const handlePrevGroup = () => {
     if (currentGroup > 1) {
-      setCurrentGroup(currentGroup - 1);
+      if (currentPage + 1 > currentGroup * 4) setCurrentGroup(currentGroup - 1);
       onPageChange(currentPage - 1);
     }
   };
@@ -46,7 +49,7 @@ export default function Pagination({ total, currentPage, onPageChange }: Paginat
         <a href="#">{'<'}</a>
       </li>
 
-      {Array.from({ length: endPage - startPage + 1 }, (_, idx) => startPage + idx).map((number) => (
+      {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((number) => (
         <li
           key={number}
           className={`pagination__item ${number === currentPage ? 'pagination__item--active' : ''}`}

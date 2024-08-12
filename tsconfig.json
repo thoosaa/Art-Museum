@@ -5,7 +5,8 @@
       "@components/*": ["./components/*"],
       "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
-      "@pages/*": ["./pages/*"]
+      "@pages/*": ["./pages/*"],
+      "@context/*": ["./context/*"]
     },
     "jsx": "react-jsx",
     "target": "ES2015",

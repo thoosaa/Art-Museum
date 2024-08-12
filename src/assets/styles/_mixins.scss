@@ -16,8 +16,7 @@
   align-items: center;
 }
 
-@mixin font($font-familty, $color, $font-size, $font-weight: 400) {
-  font-family: $font-familty;
+@mixin font($color, $font-size, $font-weight: 400) {
   color: $color;
   font-weight: $font-weight;
   font-size: $font-size + px;

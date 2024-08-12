@@ -9,11 +9,11 @@
   flex-wrap: wrap;
 
   &__item {
-    @include mixins.font('Lexend Deca', variables.$gray, 18, 300);
+    @include mixins.font(variables.$gray, 18, 300);
     padding: 7px 0px;
 
     &--active {
-      @include mixins.font('Lexend Deca', variables.$white, 18, 600);
+      @include mixins.font(variables.$white, 18, 600);
       background-color: variables.$orange;
       padding: 7px 10px;
       border-radius: 5px;

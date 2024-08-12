@@ -11,7 +11,7 @@
 
   &__item {
     @include mixins.flex-space;
-    @include mixins.font('Lexend Deca', variables.$white, 18);
+    @include mixins.font(variables.$white, 18);
     gap: 4px;
 
     &--bigger {

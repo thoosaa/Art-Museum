@@ -13,28 +13,36 @@ import search_icon from '@assets/images/search.svg';
 import abc from '@assets/images/abc.svg';
 import debounce from '@utils/helperFunctions/debounce';
 import './Home.scss';
+import { usePagination } from '@context/PageContext';
 
 const artSchema = z.object({
   art: z.string().min(1),
 });
 
 export default function Home() {
+  const { currentPage, query, isSorted, setCurrentPage, setQuery, setIsSorted } = usePagination();
   const [art, setArt] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(1);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  //const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [sort, setSort] = useState<boolean>(false);
+  //const [sort, setSort] = useState<boolean>(false);
   const formik = useFormik({
-    initialValues: { art: '' },
+    initialValues: { art: query },
     validate: withZodSchema(artSchema),
     onSubmit: (values) => {
-      fetchArt(values.art);
+      setQuery(values.art);
+      fetchArt();
     },
   });
 
   const debouncedSubmit = useCallback(
-    debounce(() => formik.submitForm(), 1000),
-    [],
+    debounce(() => {
+      if (query !== formik.values.art) {
+        setCurrentPage(1);
+      }
+      formik.submitForm();
+    }, 1000),
+    [query, formik.values.art],
   );
 
   useEffect(() => {
@@ -44,11 +52,12 @@ export default function Home() {
   }, [formik.values.art, debouncedSubmit]);
 
   useEffect(() => {
-    fetchArt(formik.values.art);
+    setQuery(formik.values.art);
+    fetchArt();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, sort]);
+  }, [currentPage, isSorted]);
 
-  const fetchArt = async (query: string = '') => {
+  const fetchArt = async () => {
     try {
       setIsLoading(true);
       console.log(query);
@@ -57,7 +66,7 @@ export default function Home() {
           q: query,
           size: 5,
           from: (currentPage - 1) * 5,
-          sort: sort ? 'title.keyword' : '',
+          sort: isSorted ? 'title.keyword' : '',
         },
       });
 
@@ -97,7 +106,10 @@ export default function Home() {
           </button>
         </form>
 
-        <button onClick={() => setSort(!sort)} className={`set-sort-button ${sort ? 'set-sort-button--active' : ''}`}>
+        <button
+          onClick={() => setIsSorted(!isSorted)}
+          className={`set-sort-button ${isSorted ? 'set-sort-button--active' : ''}`}
+        >
           <img src={abc} />
           <p> Sort in alphabetical order</p>
         </button>

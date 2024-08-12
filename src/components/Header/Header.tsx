@@ -1,9 +1,9 @@
-import './Header.scss';
+import { Link } from 'react-router-dom';
+import { useBurgerMenu } from './useBurgerMenu';
 import museum_logo from '@assets/images/museum-logo.svg';
 import bookmark from '@assets/images/bookmark.svg';
 import home from '@assets/images/home.svg';
-import { useBurgerMenu } from './useBurgerMenu';
-import { Link } from 'react-router-dom';
+import './Header.scss';
 
 type HeaderProps = { id: number };
 

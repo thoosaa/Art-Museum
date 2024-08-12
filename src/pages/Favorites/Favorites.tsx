@@ -1,8 +1,8 @@
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
-import './Favorites.scss';
-import bookmark from '@assets/images/bookmark-orange.svg';
 import FavoritesGallery from '@components/FavoritesGallery/FavoritesGallery';
+import bookmark from '@assets/images/bookmark-orange.svg';
+import './Favorites.scss';
 
 export default function Favorites() {
   return (
