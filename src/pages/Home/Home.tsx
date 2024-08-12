@@ -11,6 +11,7 @@ import Pagination from '@components/Pagination/Pagination';
 import Loader from '@components/Loader/Loader';
 import search_icon from '@assets/images/search.svg';
 import abc from '@assets/images/abc.svg';
+import debounce from '@utils/helperFunctions/debounce';
 import './Home.scss';
 
 const artSchema = z.object({
@@ -30,19 +31,6 @@ export default function Home() {
       fetchArt(values.art);
     },
   });
-
-  function debounce<T extends (...args: unknown[]) => void>(
-    func: T,
-    timeout: number = 300,
-  ): (...args: Parameters<T>) => void {
-    let timer: ReturnType<typeof setTimeout>;
-    return (...args: Parameters<T>) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        func.apply(null, [...args]);
-      }, timeout);
-    };
-  }
 
   const debouncedSubmit = useCallback(
     debounce(() => formik.submitForm(), 1000),

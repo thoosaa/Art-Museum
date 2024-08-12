@@ -20,6 +20,6 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "main.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "main.tsx", "./jest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }
