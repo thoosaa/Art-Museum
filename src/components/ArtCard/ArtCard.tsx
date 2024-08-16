@@ -1,9 +1,8 @@
 import './ArtCard.scss';
 
-import bookmark from '@assets/images/bookmark-orange.svg';
-import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
 import axios from 'axios';
-import { MouseEvent, useEffect, useState } from 'react';
+import { useBookmark } from 'hooks/useBookmark';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface ArtPieceInfo {
@@ -16,7 +15,7 @@ interface ArtPieceInfo {
 type ArtCardProps = { art_id: string };
 
 export default function ArtCard({ art_id }: ArtCardProps) {
-  const [bookmarkImg, setBookmarkImg] = useState<string>(sessionStorage.getItem(art_id) ? bookmark_fill : bookmark);
+  const { bookmarkImg, addRemoveArtPiece } = useBookmark(art_id);
   const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo>({
     title: '',
     artist: '',
@@ -42,19 +41,6 @@ export default function ArtCard({ art_id }: ArtCardProps) {
     };
     fetchArtPiece();
   }, [art_id]);
-
-  const addRemoveArtPiece = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    if (sessionStorage.getItem(art_id)) {
-      console.log('remove existing');
-      sessionStorage.removeItem(art_id);
-      setBookmarkImg(bookmark);
-    } else {
-      console.log('add new');
-      sessionStorage.setItem(art_id, art_id);
-      setBookmarkImg(bookmark_fill);
-    }
-  };
 
   return (
     <figure className="art-block" onClick={() => navigate(`/art/${art_id}`)}>

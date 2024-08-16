@@ -1,12 +1,11 @@
 import './ArtPiece.scss';
 
-import bookmark from '@assets/images/bookmark-orange.svg';
-import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
+import { useBookmark } from '@hooks/useBookmark';
 import getNationality from '@utils/helperFunctions/getNationality';
 import axios from 'axios';
-import { MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 interface ArtPieceInfo {
@@ -36,9 +35,7 @@ export default function ArtPiece() {
     repository: '',
     is_public: false,
   });
-  const [bookmarkImg, setBookmarkImg] = useState<string>(
-    sessionStorage.getItem(params.artId ?? '') ? bookmark_fill : bookmark,
-  );
+  const { bookmarkImg, addRemoveArtPiece } = useBookmark(params.artId ?? '');
 
   useEffect(() => {
     const fetchArtPiece = async () => {
@@ -63,19 +60,6 @@ export default function ArtPiece() {
     };
     fetchArtPiece();
   }, [params.artId]);
-
-  const addRemoveArtPiece = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    if (sessionStorage.getItem(params.artId ?? '')) {
-      console.log('remove existing');
-      sessionStorage.removeItem(params.artId ?? '');
-      setBookmarkImg(bookmark);
-    } else {
-      console.log('add new');
-      sessionStorage.setItem(params.artId ?? '', params.artId ?? '');
-      setBookmarkImg(bookmark_fill);
-    }
-  };
 
   return (
     <>

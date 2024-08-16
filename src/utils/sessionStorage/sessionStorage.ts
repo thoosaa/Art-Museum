@@ -1,4 +1,4 @@
-export class SessionStorage {
+class SessionStorage {
   add(key: string) {
     sessionStorage.setItem(key, key);
   }
@@ -15,3 +15,5 @@ export class SessionStorage {
     sessionStorage.removeItem(key);
   }
 }
+
+export default new SessionStorage();
