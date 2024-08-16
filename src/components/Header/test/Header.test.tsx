@@ -1,6 +1,6 @@
+import Header from '@components/Header/Header';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Header from '@components/Header/Header';
 
 describe('Header Component', () => {
   test('renders Your favorites when id is 1', () => {

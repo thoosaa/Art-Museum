@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
 import './Pagination.scss';
+
+import { useEffect, useState } from 'react';
 
 interface PaginationProps {
   total: number;

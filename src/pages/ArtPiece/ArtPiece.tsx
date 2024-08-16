@@ -1,12 +1,13 @@
-import { useEffect, useState, MouseEvent } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import Header from '@components/Header/Header';
-import Footer from '@components/Footer/Footer';
+import './ArtPiece.scss';
+
 import bookmark from '@assets/images/bookmark-orange.svg';
 import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
+import Footer from '@components/Footer/Footer';
+import Header from '@components/Header/Header';
 import getNationality from '@utils/helperFunctions/getNationality';
-import './ArtPiece.scss';
+import axios from 'axios';
+import { MouseEvent, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 interface ArtPieceInfo {
   title: string;

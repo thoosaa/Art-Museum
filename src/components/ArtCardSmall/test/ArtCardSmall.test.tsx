@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -37,10 +37,10 @@ describe('ArtCardSmall', () => {
     const bookmarkButton = screen.getByRole('button', { name: /bookmark/i });
     expect(sessionStorage.getItem(art_id)).toBeNull();
 
-    fireEvent.click(bookmarkButton);
+    act(() => fireEvent.click(bookmarkButton));
     expect(sessionStorage.getItem(art_id)).toBe(art_id);
 
-    fireEvent.click(bookmarkButton);
+    act(() => fireEvent.click(bookmarkButton));
     expect(sessionStorage.getItem(art_id)).toBeNull();
   });
 
@@ -67,7 +67,7 @@ describe('ArtCardSmall', () => {
     const artFigure = screen.getByRole('figure');
     expect(location.pathname).toBe('/');
 
-    fireEvent.click(artFigure);
+    act(() => fireEvent.click(artFigure));
     expect(location.pathname).toBe(`/art/${art_id}`);
   });
 });

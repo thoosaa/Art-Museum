@@ -1,6 +1,7 @@
-import museum_logo from '@assets/images/museum-logo-black.svg';
-import modsen_logo from '@assets/images/modsen-logo.svg';
 import './Footer.scss';
+
+import modsen_logo from '@assets/images/modsen-logo.svg';
+import museum_logo from '@assets/images/museum-logo-black.svg';
 
 export default function Footer() {
   return (
