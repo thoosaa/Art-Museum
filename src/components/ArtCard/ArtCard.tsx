@@ -1,9 +1,10 @@
-import { useEffect, useState, MouseEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import './ArtCard.scss';
+
 import bookmark from '@assets/images/bookmark-orange.svg';
 import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
-import './ArtCard.scss';
+import axios from 'axios';
+import { MouseEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface ArtPieceInfo {
   title: string;

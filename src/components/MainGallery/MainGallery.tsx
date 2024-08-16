@@ -1,5 +1,6 @@
-import ArtCard from '@components/ArtCard/ArtCard';
 import './MainGallery.scss';
+
+import ArtCard from '@components/ArtCard/ArtCard';
 
 type MainGalleryProps = { art_ids: string[] };
 

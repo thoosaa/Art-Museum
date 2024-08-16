@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import ArtCard from '@components/ArtCard/ArtCard';
+import { fireEvent, render, screen } from '@testing-library/react';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 

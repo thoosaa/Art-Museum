@@ -1,5 +1,5 @@
-import { render, screen } from '@testing-library/react';
 import FavoritesGallery from '@components/FavoritesGallery/FavoritesGallery';
+import { render, screen } from '@testing-library/react';
 
 jest.mock('@components/ArtCardSmall/ArtCardSmall', () => () => <div>ArtCardSmall</div>);
 

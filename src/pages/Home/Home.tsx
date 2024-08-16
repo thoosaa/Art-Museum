@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import { z } from 'zod';
-import { withZodSchema } from 'formik-validator-zod';
-import axios from 'axios';
-import Header from '@components/Header/Header';
+import './Home.scss';
+
+import abc from '@assets/images/abc.svg';
+import search_icon from '@assets/images/search.svg';
 import Footer from '@components/Footer/Footer';
+import Header from '@components/Header/Header';
+import Loader from '@components/Loader/Loader';
 import MainGallery from '@components/MainGallery/MainGallery';
 import OtherGallery from '@components/OtherGalley/OtherGallery';
 import Pagination from '@components/Pagination/Pagination';
-import Loader from '@components/Loader/Loader';
-import search_icon from '@assets/images/search.svg';
-import abc from '@assets/images/abc.svg';
-import debounce from '@utils/helperFunctions/debounce';
-import './Home.scss';
 import { usePagination } from '@context/PageContext';
+import debounce from '@utils/helperFunctions/debounce';
+import axios from 'axios';
+import { useFormik } from 'formik';
+import { withZodSchema } from 'formik-validator-zod';
+import { useCallback, useEffect, useState } from 'react';
+import { z } from 'zod';
 
 const artSchema = z.object({
   art: z.string().min(1),

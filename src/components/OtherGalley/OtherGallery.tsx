@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall';
 import './OtherGallery.scss';
 
+import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall';
 import Loader from '@components/Loader/Loader';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function OtherGallery() {
   const [art, setArt] = useState<string[]>([]);
