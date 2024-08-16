@@ -1,6 +1,6 @@
 import './Favorites.scss';
 
-import bookmark from '@assets/images/bookmark-orange.svg';
+import { images } from '@assets/images/images';
 import FavoritesGallery from '@components/FavoritesGallery/FavoritesGallery';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
@@ -13,7 +13,7 @@ export default function Favorites() {
         <h1 className="page-title">
           Here Are Your{' '}
           <span className="favorites-title-highlight">
-            <img src={bookmark} alt="Bookmark" height="55" />
+            <img src={images.bookmark} alt="Bookmark" height="55" />
             Favorites
           </span>
         </h1>

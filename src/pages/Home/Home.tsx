@@ -1,7 +1,6 @@
 import './Home.scss';
 
-import abc from '@assets/images/abc.svg';
-import search_icon from '@assets/images/search.svg';
+import { images } from '@assets/images/images';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
 import Loader from '@components/Loader/Loader';
@@ -103,7 +102,7 @@ export default function Home() {
             className="form__field"
           />
           <button type="button">
-            <img src={search_icon} alt="Search" />
+            <img src={images.search} alt="Search" />
           </button>
         </form>
 
@@ -111,7 +110,7 @@ export default function Home() {
           onClick={() => setIsSorted(!isSorted)}
           className={`set-sort-button ${isSorted ? 'set-sort-button--active' : ''}`}
         >
-          <img src={abc} />
+          <img src={images.abc} />
           <p> Sort in alphabetical order</p>
         </button>
 
