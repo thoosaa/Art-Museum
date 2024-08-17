@@ -9,33 +9,12 @@ import OtherGallery from '@components/OtherGalley/OtherGallery';
 import Pagination from '@components/Pagination/Pagination';
 import { usePagination } from '@context/PageContext/PageContext';
 import { useSearch } from '@hooks/useSearch';
-import { useState } from 'react';
-import { z } from 'zod';
-
-const artValidationSchema = z
-  .string()
-  .min(1, 'Empty string')
-  .max(40, 'Too many characters')
-  .regex(/^[a-zA-Z0-9 ' " \-,. \s]*$/, 'Invalid characters');
+import { useValidate } from '@hooks/useValidate';
 
 export default function Home() {
-  const { currentPage, isSorted, query, setCurrentPage, setQuery, setIsSorted } = usePagination();
+  const { currentPage, isSorted, query, setCurrentPage, setIsSorted } = usePagination();
   const { isLoading, error, art, total } = useSearch();
-  const [formError, setFormError] = useState<string>('');
-  const [value, setValue] = useState<string>('');
-
-  const onChange = (e: { target: { value: string } }) => {
-    setValue(e.target.value);
-    const res = artValidationSchema.safeParse(e.target.value);
-    if (res.success) {
-      setQuery(e.target.value);
-      setFormError('');
-    } else {
-      console.log(res.error.format());
-      setFormError(res.error.format()._errors[0]);
-      setQuery('');
-    }
-  };
+  const { value, formError, onChange } = useValidate();
 
   return (
     <>
