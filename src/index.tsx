@@ -2,7 +2,7 @@
 import '@assets/styles/index.scss';
 
 import { App } from '@components/App/App';
-import { PaginationProvider } from '@context/PageContext';
+import { PaginationProvider } from '@context/PageContext/PageContext';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
