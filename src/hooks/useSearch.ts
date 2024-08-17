@@ -8,7 +8,7 @@ import { useDebounce } from './useDebounce';
 
 export function useSearch() {
   const { currentPage, query, isSorted } = usePagination();
-  const debouncedValue = useDebounce(query, 5000);
+  const debouncedValue = useDebounce(query, 500);
   const [art, setArt] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -36,6 +36,7 @@ export function useSearch() {
         setError(getErrorMessage(error));
       }
     };
+    console.log(query);
     fetchArt(debouncedValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, isSorted, debouncedValue]);

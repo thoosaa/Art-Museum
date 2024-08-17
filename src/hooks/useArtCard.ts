@@ -14,7 +14,7 @@ export function useArtCard(id: string) {
       try {
         setIsLoading(true);
         const res = await axios.get(`${BASE_URL}/${id}`);
-        console.log(res.data.data);
+        //console.log(res.data.data);
 
         setArtPieceInfo({
           title: res.data.data.title,

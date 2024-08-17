@@ -38,8 +38,14 @@
     font-size: 14px;
     font-family: 'Lexend Deca', sans-serif;
     border: none;
-    width: 100%;
+    width: 75%;
     background-color: inherit;
+  }
+
+  &-error {
+    color: variables.$red;
+    font-size: 14px;
+    display: block;
   }
 }
 
