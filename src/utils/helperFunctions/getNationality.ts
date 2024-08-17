@@ -189,15 +189,15 @@ const nationalities = [
   'Yemenite',
   'Zambian',
   'Zimbabwean',
-];
+]
 
 export default function detectNationality(text: string) {
-  const lowercasedText = text.toLowerCase();
+  const lowercasedText = text.toLowerCase()
 
   for (const nationality of nationalities) {
     if (lowercasedText.includes(nationality.toLowerCase())) {
-      return nationality;
+      return nationality
     }
   }
-  return null;
+  return null
 }

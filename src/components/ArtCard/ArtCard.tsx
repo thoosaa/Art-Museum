@@ -1,79 +1,43 @@
-import './ArtCard.scss';
+import './ArtCard.scss'
 
-import bookmark from '@assets/images/bookmark-orange.svg';
-import bookmark_fill from '@assets/images/bookmark-orange-fill.svg';
-import axios from 'axios';
-import { MouseEvent, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-interface ArtPieceInfo {
-  title: string;
-  artist: string;
-  image_id: string;
-  is_public: boolean;
-}
-
-type ArtCardProps = { art_id: string };
+import { images } from '@assets/images/images'
+import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes'
+import { useArtCard } from '@hooks/useArtCard'
+import { useBookmark } from '@hooks/useBookmark'
+import { useNavigate } from 'react-router-dom'
+import { ArtCardProps } from 'types/types'
 
 export default function ArtCard({ art_id }: ArtCardProps) {
-  const [bookmarkImg, setBookmarkImg] = useState<string>(sessionStorage.getItem(art_id) ? bookmark_fill : bookmark);
-  const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo>({
-    title: '',
-    artist: '',
-    image_id: '',
-    is_public: false,
-  });
-  const navigate = useNavigate();
+  const { bookmarkImg, addRemoveArtPiece } = useBookmark(art_id)
+  const { artPieceInfo, isLoading, error } = useArtCard(art_id)
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchArtPiece = async () => {
-      try {
-        const res = await axios.get(`https://api.artic.edu/api/v1/artworks/${art_id}`);
-        console.log(res.data.data);
-        setArtPieceInfo({
-          title: res.data.data.title,
-          artist: res.data.data.artist_title,
-          image_id: res.data.data.image_id,
-          is_public: res.data.data.is_public_domain,
-        });
-      } catch (error) {
-        console.error('Error fetching art piece:', error);
-      }
-    };
-    fetchArtPiece();
-  }, [art_id]);
-
-  const addRemoveArtPiece = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    if (sessionStorage.getItem(art_id)) {
-      console.log('remove existing');
-      sessionStorage.removeItem(art_id);
-      setBookmarkImg(bookmark);
-    } else {
-      console.log('add new');
-      sessionStorage.setItem(art_id, art_id);
-      setBookmarkImg(bookmark_fill);
-    }
-  };
-
-  return (
-    <figure className="art-block" onClick={() => navigate(`/art/${art_id}`)}>
+  return error ? (
+    <p>{error}</p>
+  ) : isLoading ? (
+    <img src={images.loader_image} loading='lazy' />
+  ) : (
+    <figure className='art-block' onClick={() => navigate(`/art/${art_id}`)}>
       <img
-        className="art-block__image"
-        alt="Picture"
-        src={`https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`}
-        width="305"
+        className='art-block__image'
+        alt='Picture'
+        src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
+        onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
+        width='305'
+        loading='lazy'
       />
-      <figcaption className="art-block__description">
-        <div className="art-block__info">
-          <p className="art-block__title">{artPieceInfo.title}</p>
-          <p className="art-block__author">{artPieceInfo.artist}</p>
-          <p className="art-block__availability">{artPieceInfo.is_public ? 'Public' : 'Copywrite'}</p>
+      <figcaption className='art-block__description'>
+        <div className='art-block__info'>
+          <p className='art-block__title'>{artPieceInfo?.title}</p>
+          <p className='art-block__author'>{artPieceInfo?.artist}</p>
+          <p className='art-block__availability'>
+            {artPieceInfo?.is_public ? 'Public' : 'Copyright'}
+          </p>
         </div>
-        <button className="art-block__add-bookmark" onClick={addRemoveArtPiece}>
-          <img src={bookmarkImg} alt="Bookmark" width="24" />
+        <button className='art-block__add-bookmark' onClick={addRemoveArtPiece}>
+          <img src={bookmarkImg} alt='Bookmark' width='24' />
         </button>
       </figcaption>
     </figure>
-  );
+  )
 }

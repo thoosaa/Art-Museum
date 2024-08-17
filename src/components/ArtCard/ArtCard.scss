@@ -7,13 +7,7 @@
   width: 305px;
   margin-bottom: 75px;
   background-color: variables.$light-orange;
-
-  img::before {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-  }
+  cursor: pointer;
 
   &__description {
     @include mixins.flex-space;

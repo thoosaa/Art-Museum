@@ -5,8 +5,11 @@
       "@components/*": ["./components/*"],
       "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
+      "@types/*": ["./types/*"],
       "@pages/*": ["./pages/*"],
-      "@context/*": ["./context/*"]
+      "@context/*": ["./context/*"],
+      "@constants/*": ["./constants/*"],
+      "@hooks/*": ["./hooks/*"]
     },
     "jsx": "react-jsx",
     "target": "ES2015",

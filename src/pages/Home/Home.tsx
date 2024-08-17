@@ -1,109 +1,41 @@
-import './Home.scss';
+import './Home.scss'
 
-import abc from '@assets/images/abc.svg';
-import search_icon from '@assets/images/search.svg';
-import Footer from '@components/Footer/Footer';
-import Header from '@components/Header/Header';
-import Loader from '@components/Loader/Loader';
-import MainGallery from '@components/MainGallery/MainGallery';
-import OtherGallery from '@components/OtherGalley/OtherGallery';
-import Pagination from '@components/Pagination/Pagination';
-import { usePagination } from '@context/PageContext';
-import debounce from '@utils/helperFunctions/debounce';
-import axios from 'axios';
-import { useFormik } from 'formik';
-import { withZodSchema } from 'formik-validator-zod';
-import { useCallback, useEffect, useState } from 'react';
-import { z } from 'zod';
-
-const artSchema = z.object({
-  art: z.string().min(1),
-});
+import { images } from '@assets/images/images'
+import Footer from '@components/Footer/Footer'
+import Header from '@components/Header/Header'
+import Loader from '@components/Loader/Loader'
+import MainGallery from '@components/MainGallery/MainGallery'
+import OtherGallery from '@components/OtherGalley/OtherGallery'
+import Pagination from '@components/Pagination/Pagination'
+import { usePagination } from '@context/PageContext/PageContext'
+import { useSearch } from '@hooks/useSearch'
+import { useValidate } from '@hooks/useValidate'
 
 export default function Home() {
-  const { currentPage, query, isSorted, setCurrentPage, setQuery, setIsSorted } = usePagination();
-  const [art, setArt] = useState<string[]>([]);
-  const [total, setTotal] = useState<number>(1);
-  //const [currentPage, setCurrentPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  //const [sort, setSort] = useState<boolean>(false);
-  const formik = useFormik({
-    initialValues: { art: query },
-    validate: withZodSchema(artSchema),
-    onSubmit: (values) => {
-      setQuery(values.art);
-      fetchArt();
-    },
-  });
-
-  const debouncedSubmit = useCallback(
-    debounce(() => {
-      if (query !== formik.values.art) {
-        setCurrentPage(1);
-      }
-      formik.submitForm();
-    }, 1000),
-    [query, formik.values.art],
-  );
-
-  useEffect(() => {
-    if (formik.values.art) {
-      debouncedSubmit();
-    }
-  }, [formik.values.art, debouncedSubmit]);
-
-  useEffect(() => {
-    setQuery(formik.values.art);
-    fetchArt();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, isSorted]);
-
-  const fetchArt = async () => {
-    try {
-      setIsLoading(true);
-      console.log(query);
-      const res = await axios.get(`https://api.artic.edu/api/v1/artworks/search`, {
-        params: {
-          q: query,
-          size: 5,
-          from: (currentPage - 1) * 5,
-          sort: isSorted ? 'title.keyword' : '',
-        },
-      });
-
-      setTotal(res.data.pagination.total);
-      setArt(res.data.data.map((item: { id: number }) => item.id));
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    console.log(page);
-  };
+  const { currentPage, isSorted, query, setCurrentPage, setIsSorted } = usePagination()
+  const { isLoading, error, art, total } = useSearch()
+  const { value, formError, onChange } = useValidate()
 
   return (
     <>
-      <Header id={1} />
-      <main className="main">
-        <h1 className="page-title">
-          Let's Find Some <span className="page-title-highlight">Art</span> Here!
+      <Header amountOfLinks={1} />
+      <main className='main'>
+        <h1 className='page-title'>
+          Let's Find Some <span className='page-title-highlight'>Art</span> Here!
         </h1>
 
-        <form className={`form ${formik.errors.art && formik.touched.art ? 'input-error' : ''}`}>
+        <form className={`form ${formError ? 'input-error' : ''}`}>
           <input
-            placeholder="Search art, artist, work..."
-            type="text"
-            name="art"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.art}
-            className="form__field"
+            placeholder='Search art, artist, work...'
+            type='text'
+            name='art'
+            value={value || query}
+            onChange={onChange}
+            className='form__field'
           />
-          <button type="button">
-            <img src={search_icon} alt="Search" />
+          {formError && <p className='form-error'>{formError}</p>}
+          <button type='button'>
+            <img src={images.search} alt='Search' />
           </button>
         </form>
 
@@ -111,25 +43,38 @@ export default function Home() {
           onClick={() => setIsSorted(!isSorted)}
           className={`set-sort-button ${isSorted ? 'set-sort-button--active' : ''}`}
         >
-          <img src={abc} />
+          <img src={images.abc} />
           <p> Sort in alphabetical order</p>
         </button>
 
         <section>
-          <h3 className="section__subtitle">Topics for you</h3>
-          <h2 className="section__title">Our special gallery</h2>
-          {isLoading ? <Loader /> : <MainGallery art_ids={art} />}
+          <h3 className='section__subtitle'>Topics for you</h3>
+          <h2 className='section__title'>Our special gallery</h2>
+          {error ? (
+            <h1 className='page-title'>{error}</h1>
+          ) : isLoading ? (
+            <Loader />
+          ) : (
+            <MainGallery art_ids={art} />
+          )}
         </section>
 
-        <Pagination total={total > 990 ? 990 : total} currentPage={currentPage} onPageChange={handlePageChange} />
+        <Pagination
+          total={total > 990 ? 990 : total}
+          currentPage={currentPage}
+          onPageChange={(page: number) => {
+            setCurrentPage(page)
+            console.log(page)
+          }}
+        />
 
-        <section className="section-other-gallery">
-          <h3 className="section__subtitle">Here some more</h3>
-          <h2 className="section__title">Other works for you</h2>
+        <section className='section-other-gallery'>
+          <h3 className='section__subtitle'>Here some more</h3>
+          <h2 className='section__title'>Other works for you</h2>
           <OtherGallery />
         </section>
       </main>
       <Footer />
     </>
-  );
+  )
 }
