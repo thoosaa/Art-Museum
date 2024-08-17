@@ -1,7 +1,6 @@
 import './ArtCardSmall.scss';
 
 import { images } from '@assets/images/images';
-import Loader from '@components/Loader/Loader';
 import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes';
 import { useArtCard } from '@hooks/useArtCard';
 import { useBookmark } from '@hooks/useBookmark';
@@ -16,7 +15,7 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   return error ? (
     <p>{error}</p>
   ) : isLoading ? (
-    <Loader />
+    <img src={images.loader_image} />
   ) : (
     <figure className="small-art-block" onClick={() => navigate(`/art/${art_id}`)}>
       <img
@@ -26,6 +25,7 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
         onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
         width="80"
         height="80"
+        loading="lazy"
       />
       <figcaption>
         <div className="small-art-block__info">

@@ -3,9 +3,11 @@ import './Header.scss';
 import { images } from '@assets/images/images';
 import { HeaderLink } from '@components/HeaderLink/HeaderLink';
 import { useBurgerMenu } from '@hooks/useBurgerMenu';
+import { memo } from 'react';
 import { HeaderProps } from 'types/types';
 
-export default function Header({ amountOfLinks }: HeaderProps) {
+function Header({ amountOfLinks }: HeaderProps) {
+  console.log('header rendered');
   const [isOpen, isOverlay, toggle] = useBurgerMenu();
 
   return (
@@ -30,3 +32,5 @@ export default function Header({ amountOfLinks }: HeaderProps) {
     </>
   );
 }
+
+export default memo(Header);

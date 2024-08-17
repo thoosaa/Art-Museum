@@ -15,7 +15,7 @@ export default function ArtCard({ art_id }: ArtCardProps) {
   return error ? (
     <p>{error}</p>
   ) : isLoading ? (
-    <img src={images.loader_image} />
+    <img src={images.loader_image} loading="lazy" />
   ) : (
     <figure className="art-block" onClick={() => navigate(`/art/${art_id}`)}>
       <img
@@ -24,6 +24,7 @@ export default function ArtCard({ art_id }: ArtCardProps) {
         src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
         onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
         width="305"
+        loading="lazy"
       />
       <figcaption className="art-block__description">
         <div className="art-block__info">
