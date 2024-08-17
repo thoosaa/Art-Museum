@@ -10,3 +10,10 @@ export interface ArtPieceInfo {
   repository: string;
   is_public: boolean;
 }
+
+export interface ArtPieceInfoBasic {
+  title: string;
+  artist: string;
+  image_id: string;
+  is_public: boolean;
+}

@@ -1,61 +1,36 @@
 import './ArtCardSmall.scss';
 
+import Loader from '@components/Loader/Loader';
+import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes';
+import { useArtCard } from '@hooks/useArtCard';
 import { useBookmark } from '@hooks/useBookmark';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-interface ArtPieceInfo {
-  title: string;
-  artist: string;
-  image_id: string;
-  is_public: boolean;
-}
 
 type ArtCardPropsSmall = { art_id: string };
 
 export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   const { bookmarkImg, addRemoveArtPiece } = useBookmark(art_id);
-  const [artPieceInfo, setArtPieceInfo] = useState<ArtPieceInfo>({
-    title: '',
-    artist: '',
-    image_id: '',
-    is_public: false,
-  });
+  const { artPieceInfo, isLoading, error } = useArtCard(art_id);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchArtPiece = async () => {
-      try {
-        const res = await axios.get(`https://api.artic.edu/api/v1/artworks/${art_id}`);
-        console.log(res.data.data);
-        setArtPieceInfo({
-          title: res.data.data.title,
-          artist: res.data.data.artist_title,
-          image_id: res.data.data.image_id,
-          is_public: res.data.data.is_public_domain,
-        });
-      } catch (error) {
-        console.error('Error fetching art piece:', error);
-      }
-    };
-    fetchArtPiece();
-  }, [art_id]);
-
-  return (
+  return error ? (
+    <h1 className="page-title">{error}</h1>
+  ) : isLoading ? (
+    <Loader />
+  ) : (
     <figure className="small-art-block" onClick={() => navigate(`/art/${art_id}`)}>
       <img
         className="small-art-block__image"
         alt="Picture"
-        src={`https://www.artic.edu/iiif/2/${artPieceInfo.image_id}/full/843,/0/default.jpg`}
+        src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
         width="80"
         height="80"
       />
       <figcaption>
         <div className="small-art-block__info">
-          <p className="art-block__title">{artPieceInfo.title}</p>
-          <p className="art-block__author">{artPieceInfo.artist}</p>
-          <p className="art-block__availability">{artPieceInfo.is_public ? 'Public' : 'Copywrite'}</p>
+          <p className="art-block__title">{artPieceInfo?.title}</p>
+          <p className="art-block__author">{artPieceInfo?.artist}</p>
+          <p className="art-block__availability">{artPieceInfo?.is_public ? 'Public' : 'Copywrite'}</p>
         </div>
       </figcaption>
       <button className="art-block__add-bookmark" onClick={addRemoveArtPiece}>

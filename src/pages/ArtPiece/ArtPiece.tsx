@@ -16,10 +16,10 @@ export default function ArtPiece() {
   return (
     <>
       <Header id={2} />
-      {isLoading ? (
-        <Loader />
-      ) : error ? (
+      {error ? (
         <h1 className="page-title">{error}</h1>
+      ) : isLoading ? (
+        <Loader />
       ) : (
         <main className="main art-piece">
           <div className="art-piece-image">
