@@ -8,56 +8,23 @@ import MainGallery from '@components/MainGallery/MainGallery';
 import OtherGallery from '@components/OtherGalley/OtherGallery';
 import Pagination from '@components/Pagination/Pagination';
 import { usePagination } from '@context/PageContext';
-import debounce from '@utils/helperFunctions/debounce';
+import { useDebounce } from '@hooks/useDebounce';
 import axios from 'axios';
-import { useFormik } from 'formik';
-import { withZodSchema } from 'formik-validator-zod';
-import { useCallback, useEffect, useState } from 'react';
-import { z } from 'zod';
-
-const artSchema = z.object({
-  art: z.string().min(1),
-});
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const { currentPage, query, isSorted, setCurrentPage, setQuery, setIsSorted } = usePagination();
+  const debouncedValue = useDebounce(query, 5000);
   const [art, setArt] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(1);
-  //const [currentPage, setCurrentPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  //const [sort, setSort] = useState<boolean>(false);
-  const formik = useFormik({
-    initialValues: { art: query },
-    validate: withZodSchema(artSchema),
-    onSubmit: (values) => {
-      setQuery(values.art);
-      fetchArt();
-    },
-  });
-
-  const debouncedSubmit = useCallback(
-    debounce(() => {
-      if (query !== formik.values.art) {
-        setCurrentPage(1);
-      }
-      formik.submitForm();
-    }, 1000),
-    [query, formik.values.art],
-  );
 
   useEffect(() => {
-    if (formik.values.art) {
-      debouncedSubmit();
-    }
-  }, [formik.values.art, debouncedSubmit]);
-
-  useEffect(() => {
-    setQuery(formik.values.art);
-    fetchArt();
+    fetchArt(debouncedValue);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, isSorted]);
+  }, [currentPage, isSorted, debouncedValue]);
 
-  const fetchArt = async () => {
+  const fetchArt = async (query: string) => {
     try {
       setIsLoading(true);
       console.log(query);
@@ -91,14 +58,13 @@ export default function Home() {
           Let's Find Some <span className="page-title-highlight">Art</span> Here!
         </h1>
 
-        <form className={`form ${formik.errors.art && formik.touched.art ? 'input-error' : ''}`}>
+        <form className="form">
           <input
             placeholder="Search art, artist, work..."
             type="text"
             name="art"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.art}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             className="form__field"
           />
           <button type="button">
