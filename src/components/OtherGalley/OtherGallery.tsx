@@ -3,8 +3,9 @@ import './OtherGallery.scss';
 import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall';
 import Loader from '@components/Loader/Loader';
 import { useArtworks } from '@hooks/useArtworks';
+import { memo } from 'react';
 
-export default function OtherGallery() {
+function OtherGallery() {
   const { art, isLoading, error } = useArtworks();
 
   return (
@@ -13,3 +14,5 @@ export default function OtherGallery() {
     </div>
   );
 }
+
+export default memo(OtherGallery);
