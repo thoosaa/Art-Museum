@@ -1,19 +1,19 @@
 class SessionStorage {
   add(key: string) {
-    sessionStorage.setItem(key, key);
+    sessionStorage.setItem(key, key)
   }
 
   has(key: string): boolean {
     if (sessionStorage.getItem(key)) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
   }
 
   remove(key: string): void {
-    sessionStorage.removeItem(key);
+    sessionStorage.removeItem(key)
   }
 }
 
-export default new SessionStorage();
+export default new SessionStorage()

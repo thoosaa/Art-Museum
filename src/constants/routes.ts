@@ -1,6 +1,6 @@
-import ArtPiece from '@pages/ArtPiece/ArtPiece';
-import Favorites from '@pages/Favorites/Favorites';
-import Home from '@pages/Home/Home';
+import ArtPiece from '@pages/ArtPiece/ArtPiece'
+import Favorites from '@pages/Favorites/Favorites'
+import Home from '@pages/Home/Home'
 
 export const routes = [
   {
@@ -15,4 +15,4 @@ export const routes = [
     path: '/art/:artId',
     component: ArtPiece,
   },
-];
+]

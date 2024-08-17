@@ -1,15 +1,15 @@
-import abc from './abc.svg';
-import bookmark from './bookmark.svg';
-import bookmark_orange from './bookmark-orange.svg';
-import bookmark_orange_fill from './bookmark-orange-fill.svg';
-import home from './home.svg';
-import loader_image from './image-loader.svg';
-import loader from './loader.svg';
-import modsen_logo from './modsen-logo.svg';
-import museum_logo from './museum-logo.svg';
-import museum_logo_black from './museum-logo-black.svg';
-import museum_logo_icon from './museum-logo-icon.svg';
-import search from './search.svg';
+import abc from './abc.svg'
+import bookmark from './bookmark.svg'
+import bookmark_orange from './bookmark-orange.svg'
+import bookmark_orange_fill from './bookmark-orange-fill.svg'
+import home from './home.svg'
+import loader_image from './image-loader.svg'
+import loader from './loader.svg'
+import modsen_logo from './modsen-logo.svg'
+import museum_logo from './museum-logo.svg'
+import museum_logo_black from './museum-logo-black.svg'
+import museum_logo_icon from './museum-logo-icon.svg'
+import search from './search.svg'
 
 export const images = {
   abc,
@@ -24,4 +24,4 @@ export const images = {
   museum_logo,
   search,
   loader_image,
-};
+}
