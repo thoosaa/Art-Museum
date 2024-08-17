@@ -5,8 +5,7 @@ import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes';
 import { useArtCard } from '@hooks/useArtCard';
 import { useBookmark } from '@hooks/useBookmark';
 import { useNavigate } from 'react-router-dom';
-
-type ArtCardPropsSmall = { art_id: string };
+import { ArtCardPropsSmall } from 'types/types';
 
 export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   const { bookmarkImg, addRemoveArtPiece } = useBookmark(art_id);

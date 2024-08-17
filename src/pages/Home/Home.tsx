@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <>
-      <Header id={1} />
+      <Header amountOfLinks={1} />
       <main className="main">
         <h1 className="page-title">
           Let's Find Some <span className="page-title-highlight">Art</span> Here!

@@ -1,12 +1,7 @@
 import './Pagination.scss';
 
 import { useEffect, useState } from 'react';
-
-interface PaginationProps {
-  total: number;
-  currentPage: number;
-  onPageChange: (page: number) => void;
-}
+import { PaginationProps } from 'types/types';
 
 export default function Pagination({ total, currentPage, onPageChange }: PaginationProps) {
   const pageSize = 5;

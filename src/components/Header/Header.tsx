@@ -3,16 +3,15 @@ import './Header.scss';
 import { images } from '@assets/images/images';
 import { HeaderLink } from '@components/HeaderLink/HeaderLink';
 import { useBurgerMenu } from '@hooks/useBurgerMenu';
+import { HeaderProps } from 'types/types';
 
-type HeaderProps = { id: number };
-
-export default function Header({ id }: HeaderProps) {
+export default function Header({ amountOfLinks }: HeaderProps) {
   const [isOpen, isOverlay, toggle] = useBurgerMenu();
 
   return (
     <>
       <ul className={`header__burger-list ${isOverlay ? 'overlay' : ''}`}>
-        {id === 2 ? <HeaderLink src={images.home} link="/" title="Home" isBurger={true} /> : ''}
+        {amountOfLinks === 2 ? <HeaderLink src={images.home} link="/" title="Home" isBurger={true} /> : ''}
         <HeaderLink src={images.bookmark} link="/favorites" title="Your favorites" isBurger={true} />
       </ul>
 
@@ -24,7 +23,7 @@ export default function Header({ id }: HeaderProps) {
         </div>
 
         <ul className="header__list">
-          {id === 2 ? <HeaderLink src={images.home} link="/" title="Home" isBurger={false} /> : ''}
+          {amountOfLinks === 2 ? <HeaderLink src={images.home} link="/" title="Home" isBurger={false} /> : ''}
           <HeaderLink src={images.bookmark} link="/favorites" title="Your favorites" isBurger={false} />
         </ul>
       </header>

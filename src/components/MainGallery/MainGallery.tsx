@@ -1,8 +1,7 @@
 import './MainGallery.scss';
 
 import ArtCard from '@components/ArtCard/ArtCard';
-
-type MainGalleryProps = { art_ids: string[] };
+import { MainGalleryProps } from 'types/types';
 
 export default function MainGallery({ art_ids }: MainGalleryProps) {
   return (

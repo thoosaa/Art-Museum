@@ -5,7 +5,7 @@
       "@components/*": ["./components/*"],
       "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
-      "@api/*": ["./api/*"],
+      "@types/*": ["./types/*"],
       "@pages/*": ["./pages/*"],
       "@context/*": ["./context/*"],
       "@constants/*": ["./constants/*"],

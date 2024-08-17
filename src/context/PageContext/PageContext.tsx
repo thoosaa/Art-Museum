@@ -1,13 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-
-interface PaginationContextProps {
-  currentPage: number;
-  query: string;
-  isSorted: boolean;
-  setCurrentPage: (page: number) => void;
-  setQuery: (query: string) => void;
-  setIsSorted: (sort: boolean) => void;
-}
+import { PaginationContextProps } from 'types/types';
 
 const PaginationContext = createContext<PaginationContextProps | undefined>(undefined);
 

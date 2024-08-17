@@ -14,13 +14,13 @@ export function useArtCard(id: string) {
       try {
         setIsLoading(true);
         const res = await axios.get(`${BASE_URL}/${id}`);
-        //console.log(res.data.data);
+        const info = res.data.data;
 
         setArtPieceInfo({
-          title: res.data.data.title,
-          artist: res.data.data.artist_title,
-          image_id: res.data.data.image_id,
-          is_public: res.data.data.is_public_domain,
+          title: info.title,
+          artist: info.artist_title,
+          image_id: info.image_id,
+          is_public: info.is_public_domain,
         });
         setIsLoading(false);
       } catch (error) {

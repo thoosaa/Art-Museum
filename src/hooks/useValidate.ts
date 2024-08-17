@@ -1,5 +1,5 @@
 import { usePagination } from '@context/PageContext/PageContext';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { z } from 'zod';
 
 const artValidationSchema = z
@@ -13,7 +13,7 @@ export function useValidate() {
   const [formError, setFormError] = useState<string>('');
   const [value, setValue] = useState<string>('');
 
-  const onChange = (e: { target: { value: string } }) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     const res = artValidationSchema.safeParse(e.target.value);
     if (res.success) {

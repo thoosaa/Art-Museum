@@ -8,7 +8,7 @@ import Header from '@components/Header/Header';
 export default function Favorites() {
   return (
     <>
-      <Header id={2} />
+      <Header amountOfLinks={2} />
       <main className="main">
         <h1 className="page-title">
           Here Are Your{' '}

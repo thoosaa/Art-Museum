@@ -1,11 +1,5 @@
 import { Link } from 'react-router-dom';
-
-interface HeaderListProps {
-  src: string;
-  link: string;
-  title: string;
-  isBurger: boolean;
-}
+import { HeaderListProps } from 'types/types';
 
 export function HeaderLink({ src, link, title, isBurger }: HeaderListProps) {
   return (
