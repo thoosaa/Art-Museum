@@ -14,7 +14,7 @@ export function useArtworks() {
       try {
         setIsLoading(true);
         const res = await axios.get(`${BASE_URL}?limit=${numberOfArtworks}`);
-        console.log(res.data.data.map((item: { id: number }) => item.id));
+        //console.log(res.data.data.map((item: { id: number }) => item.id));
         setArt(res.data.data.map((item: { id: number }) => item.id));
         setIsLoading(false);
       } catch (err) {

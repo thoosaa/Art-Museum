@@ -15,13 +15,12 @@ export function useSearch() {
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    const fetchArt = async (query: string) => {
+    const fetchArt = async () => {
       try {
         setIsLoading(true);
-        console.log(query);
         const res = await axios.get(`${BASE_URL}${SEARCH_ENDPOINT}`, {
           params: {
-            q: query,
+            q: query || debouncedValue,
             size: 5,
             from: (currentPage - 1) * 5,
             sort: isSorted ? 'title.keyword' : '',
@@ -36,8 +35,7 @@ export function useSearch() {
         setError(getErrorMessage(error));
       }
     };
-    console.log(query);
-    fetchArt(debouncedValue);
+    fetchArt();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, isSorted, debouncedValue]);
 
