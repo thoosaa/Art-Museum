@@ -1,5 +1,6 @@
 import './ArtCard.scss';
 
+import { images } from '@assets/images/images';
 import Loader from '@components/Loader/Loader';
 import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes';
 import { useArtCard } from '@hooks/useArtCard';
@@ -22,6 +23,7 @@ export default function ArtCard({ art_id }: ArtCardProps) {
         className="art-block__image"
         alt="Picture"
         src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
+        onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
         width="305"
       />
       <figcaption className="art-block__description">

@@ -1,5 +1,6 @@
 import './ArtPiece.scss';
 
+import { images } from '@assets/images/images';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
 import Loader from '@components/Loader/Loader';
@@ -23,7 +24,11 @@ export default function ArtPiece() {
       ) : (
         <main className="main art-piece">
           <div className="art-piece-image">
-            <img alt="Picture" src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`} />
+            <img
+              alt="Picture"
+              src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
+              onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
+            />
             <button className="art-block__add-bookmark art-piece-bookmark" onClick={addRemoveArtPiece}>
               <img src={bookmarkImg} alt="Bookmark" width="24" />
             </button>
