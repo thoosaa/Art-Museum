@@ -1,7 +1,6 @@
 import './ArtCard.scss';
 
 import { images } from '@assets/images/images';
-import Loader from '@components/Loader/Loader';
 import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes';
 import { useArtCard } from '@hooks/useArtCard';
 import { useBookmark } from '@hooks/useBookmark';
@@ -14,9 +13,9 @@ export default function ArtCard({ art_id }: ArtCardProps) {
   const navigate = useNavigate();
 
   return error ? (
-    <h1 className="page-title">{error}</h1>
+    <p>{error}</p>
   ) : isLoading ? (
-    <Loader />
+    <img src={images.loader_image} />
   ) : (
     <figure className="art-block" onClick={() => navigate(`/art/${art_id}`)}>
       <img

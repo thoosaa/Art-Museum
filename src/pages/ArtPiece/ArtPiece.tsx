@@ -18,7 +18,7 @@ export default function ArtPiece() {
     <>
       <Header amountOfLinks={2} />
       {error ? (
-        <h1 className="page-title">{error}</h1>
+        <h1 className="page-title main">{error}</h1>
       ) : isLoading ? (
         <Loader />
       ) : (

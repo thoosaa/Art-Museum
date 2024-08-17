@@ -14,7 +14,7 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   const navigate = useNavigate();
 
   return error ? (
-    <h1 className="page-title">{error}</h1>
+    <p>{error}</p>
   ) : isLoading ? (
     <Loader />
   ) : (

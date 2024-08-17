@@ -50,7 +50,7 @@ export default function Home() {
         <section>
           <h3 className="section__subtitle">Topics for you</h3>
           <h2 className="section__title">Our special gallery</h2>
-          {error ? <h1>{error}</h1> : isLoading ? <Loader /> : <MainGallery art_ids={art} />}
+          {error ? <h1 className="page-title">{error}</h1> : isLoading ? <Loader /> : <MainGallery art_ids={art} />}
         </section>
 
         <Pagination
