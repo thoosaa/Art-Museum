@@ -1,7 +1,4 @@
-import { ReactNode } from 'react'
-import { ThemeProvider } from 'styled-components'
-
-const theme = {
+export const theme = {
   colors: {
     white: '#ffffff',
     whiteGray: '#fafafa',
@@ -69,9 +66,3 @@ const theme = {
     xl: 1371.98,
   },
 }
-
-const Theme: React.FC<{ children: ReactNode }> = ({ children }) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-)
-
-export default Theme

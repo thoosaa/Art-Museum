@@ -2,14 +2,15 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
-      "@types/*": ["./types/*"],
-      "@pages/*": ["./pages/*"],
-      "@context/*": ["./context/*"],
+      "@components/*": ["./components/*"],
       "@constants/*": ["./constants/*"],
-      "@hooks/*": ["./hooks/*"]
+      "@context/*": ["./context/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@pages/*": ["./pages/*"],
+      "@styles/*": ["./styles/*"],
+      "@types/*": ["./types/*"],
+      "@utils/*": ["./utils/*"]
     },
     "jsx": "react-jsx",
     "target": "ES2015",
