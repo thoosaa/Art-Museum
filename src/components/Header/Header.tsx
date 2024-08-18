@@ -8,7 +8,6 @@ import { HeaderProps } from 'types/types'
 import { HeaderBurger, HeaderBurgerList, HeaderList, HeaderStyled } from './Header.styled'
 
 function Header({ amountOfLinks }: HeaderProps) {
-  console.log('header rendered')
   const [isOpen, isOverlay, toggle] = useBurgerMenu()
   const [lockScroll, unlockScroll] = useScrollLock()
 

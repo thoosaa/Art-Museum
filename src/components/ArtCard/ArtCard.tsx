@@ -17,7 +17,6 @@ export default function ArtCard({ art_id }: ArtCardProps) {
   const imageId = artPieceInfo?.image_id || '0'
 
   const imgSource = `${IMAGE_URL}/${imageId}/${IMAGE_SIZE}`
-  console.log(imgSource)
 
   if (error) {
     return <p>{error}</p>
