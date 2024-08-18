@@ -2,7 +2,7 @@ import { BASE_URL, SEARCH_ENDPOINT } from '@constants/api_routes'
 import { usePagination } from '@context/PageContext/PageContext'
 import getErrorMessage from '@utils/helperFunctions/getErrorMessage'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { useDebounce } from './useDebounce'
 
@@ -14,30 +14,31 @@ export function useSearch() {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
 
-  useEffect(() => {
-    const fetchArt = async () => {
-      try {
-        setIsLoading(true)
-        const res = await axios.get(`${BASE_URL}/${SEARCH_ENDPOINT}`, {
-          params: {
-            q: query || debouncedValue,
-            size: 5,
-            from: (currentPage - 1) * 5,
-            sort: isSorted ? 'title.keyword' : '',
-          },
-        })
-
-        setTotal(res.data.pagination.total)
-        setArt(res.data.data.map((item: { id: number }) => item.id))
-        setIsLoading(false)
-      } catch (err) {
-        console.log(err)
-        setError(getErrorMessage(error))
+  const fetchArt = useCallback(async () => {
+    try {
+      const body = {
+        params: {
+          q: query || debouncedValue,
+          size: 5,
+          from: (currentPage - 1) * 5,
+          sort: isSorted ? 'title.keyword' : '',
+        },
       }
+
+      const res = await axios.get(`${BASE_URL}/${SEARCH_ENDPOINT}`, body)
+
+      setTotal(res.data.pagination.total)
+      setArt(res.data.data.map((item: { id: number }) => item.id))
+    } catch (error) {
+      setError(getErrorMessage(error))
+    } finally {
+      setIsLoading(false)
     }
+  }, [currentPage, debouncedValue, isSorted, query])
+
+  useEffect(() => {
     fetchArt()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, isSorted, debouncedValue])
+  }, [fetchArt])
 
   return { isLoading, error, art, total }
 }

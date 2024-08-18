@@ -19,11 +19,11 @@ export function useValidate() {
     if (res.success) {
       setQuery(e.target.value)
       setFormError('')
-    } else {
-      console.log(res.error.format())
-      setFormError(res.error.format()._errors[0])
-      setQuery('')
+      return
     }
+
+    setFormError(res.error.format()._errors[0])
+    setQuery('')
   }
 
   return { value, formError, onChange }
