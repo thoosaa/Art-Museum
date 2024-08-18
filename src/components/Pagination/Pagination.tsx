@@ -1,7 +1,7 @@
-import './Pagination.scss'
-
 import { useEffect, useState } from 'react'
 import { PaginationProps } from 'types/types'
+
+import { PaginationItem, PaginationStyled } from './Pagination.styled'
 
 export default function Pagination({ total, currentPage, onPageChange }: PaginationProps) {
   const pageSize = 5
@@ -37,30 +37,30 @@ export default function Pagination({ total, currentPage, onPageChange }: Paginat
   }
 
   return (
-    <ul className='pagination'>
-      <li
-        className={`pagination__item ${currentGroup === 1 ? 'pagination__item--disabled' : ''}`}
+    <PaginationStyled>
+      <PaginationItem
+        className={currentGroup === 1 ? 'pagination__item--disabled' : ''}
         onClick={handlePrevGroup}
       >
         <a href='#'>{'<'}</a>
-      </li>
+      </PaginationItem>
 
       {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((number) => (
-        <li
+        <PaginationItem
           key={number}
-          className={`pagination__item ${number === currentPage ? 'pagination__item--active' : ''}`}
+          className={number === currentPage ? 'active' : ''}
           onClick={() => handlePageClick(number)}
         >
           <a href='#'>{number}</a>
-        </li>
+        </PaginationItem>
       ))}
 
-      <li
-        className={`pagination__item ${currentGroup === maxGroups ? 'pagination__item--disabled' : ''}`}
+      <PaginationItem
+        className={currentGroup === maxGroups ? 'disabled' : ''}
         onClick={handleNextGroup}
       >
         <a href='#'>{'>'}</a>
-      </li>
-    </ul>
+      </PaginationItem>
+    </PaginationStyled>
   )
 }

@@ -1,18 +1,21 @@
-import './Header.scss'
-
 import { images } from '@assets/images/images'
 import { HeaderLink } from '@components/HeaderLink/HeaderLink'
 import { useBurgerMenu } from '@hooks/useBurgerMenu'
 import { memo } from 'react'
 import { HeaderProps } from 'types/types'
 
+import { HeaderBurger, HeaderBurgerList, HeaderList, HeaderStyled } from './Header.styled'
+
 function Header({ amountOfLinks }: HeaderProps) {
   console.log('header rendered')
   const [isOpen, isOverlay, toggle] = useBurgerMenu()
 
+  const hasOverlayStyle = isOverlay ? 'overlay' : ''
+  const hasOpenStyle = isOpen ? 'close' : ''
+
   return (
     <>
-      <ul className={`header__burger-list ${isOverlay ? 'overlay' : ''}`}>
+      <HeaderBurgerList className={hasOverlayStyle}>
         {amountOfLinks === 2 ? (
           <HeaderLink src={images.home} link='/' title='Home' isBurger={true} />
         ) : (
@@ -24,16 +27,16 @@ function Header({ amountOfLinks }: HeaderProps) {
           title='Your favorites'
           isBurger={true}
         />
-      </ul>
+      </HeaderBurgerList>
 
-      <header className='header'>
-        <img src={images.museum_logo} alt='Museum logo' className='header__logo' />
+      <HeaderStyled>
+        <img src={images.museum_logo} alt='Museum logo' />
 
-        <div className={`header__burger ${isOpen ? 'close' : ''}`} onClick={toggle}>
+        <HeaderBurger className={hasOpenStyle} onClick={toggle}>
           <span></span>
-        </div>
+        </HeaderBurger>
 
-        <ul className='header__list'>
+        <HeaderList>
           {amountOfLinks === 2 ? (
             <HeaderLink src={images.home} link='/' title='Home' isBurger={false} />
           ) : (
@@ -45,8 +48,8 @@ function Header({ amountOfLinks }: HeaderProps) {
             title='Your favorites'
             isBurger={false}
           />
-        </ul>
-      </header>
+        </HeaderList>
+      </HeaderStyled>
     </>
   )
 }

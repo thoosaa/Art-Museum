@@ -1,17 +1,15 @@
 import { Link } from 'react-router-dom'
 import { HeaderListProps } from 'types/types'
 
+import { HeaderIcon, HeaderItem } from './HeaderLink.styled'
+
 export function HeaderLink({ src, link, title, isBurger }: HeaderListProps) {
+  const hasBurgerStyle = isBurger ? 'bigger' : ''
+
   return (
-    <li className={`header__item ${isBurger ? 'header__item--bigger' : ''}`}>
-      <img
-        src={src}
-        alt='Bookmark'
-        className={`header__icon ${isBurger ? 'header__icon--bigger' : ''}`}
-      />
-      <Link to={link} className='header__link'>
-        {title}
-      </Link>
-    </li>
+    <HeaderItem className={hasBurgerStyle}>
+      <HeaderIcon src={src} alt='Bookmark' className={hasBurgerStyle} />
+      <Link to={link}>{title}</Link>
+    </HeaderItem>
   )
 }

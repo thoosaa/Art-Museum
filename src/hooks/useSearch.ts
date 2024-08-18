@@ -18,7 +18,7 @@ export function useSearch() {
     const fetchArt = async () => {
       try {
         setIsLoading(true)
-        const res = await axios.get(`${BASE_URL}${SEARCH_ENDPOINT}`, {
+        const res = await axios.get(`${BASE_URL}/${SEARCH_ENDPOINT}`, {
           params: {
             q: query || debouncedValue,
             size: 5,

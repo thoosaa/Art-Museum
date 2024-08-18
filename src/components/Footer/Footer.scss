@@ -1,9 +1,0 @@
-@use '../../assets/styles/mixins';
-@use '../../assets/styles/variables';
-
-.footer {
-  @include mixins.flex-space;
-  background-color: variables.$white;
-  height: 127px;
-  margin-top: 127px;
-}

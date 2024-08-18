@@ -1,10 +1,4 @@
-@use './layout';
-@use './variables';
-
-/* Style reset */
-*,
-*::after,
-*::before {
+* {
   box-sizing: border-box;
 }
 
@@ -110,17 +104,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:before,
 blockquote:after,
 q:before,
@@ -128,6 +126,7 @@ q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -160,5 +159,47 @@ input:focus {
 html {
   font-family: 'Lexend Deca';
   font-size: 18px;
-  background-color: variables.$white-gray;
+  background-color: #fafafa;
+}
+
+.footer,
+.header,
+.main {
+  padding: 32px 23px;
+}
+
+.main {
+  margin: 88px 0;
+}
+
+@media (min-width: 575.98px) {
+  .footer,
+  .header,
+  .main {
+    padding: 32px calc(50% - 290px);
+  }
+}
+
+@media (min-width: 767.98px) {
+  .footer,
+  .header,
+  .main {
+    padding: 32px calc(50% - 360px);
+  }
+}
+
+@media (min-width: 991.98px) {
+  .footer,
+  .header,
+  .main {
+    padding: 32px calc(50% - 480px);
+  }
+}
+
+@media (min-width: 1371.98px) {
+  .footer,
+  .header,
+  .main {
+    padding: 32px calc(50% - 640px);
+  }
 }

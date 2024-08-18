@@ -1,16 +1,21 @@
+import '@styles/globals.scss'
+
+import { AppRouting } from '@components/AppRouting/AppRouting'
 import { Fallback } from '@components/Fallback/Fallback'
-import { routes } from '@constants/routes'
+import { PaginationProvider } from '@context/PageContext/PageContext'
 import { ErrorBoundary } from 'react-error-boundary'
-import { Route, Routes } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+
+import { theme } from './theme'
 
 export function App() {
   return (
-    <ErrorBoundary fallbackRender={Fallback} onReset={(details) => console.log(details)}>
-      <Routes>
-        {routes.map(({ path, component: Component }) => (
-          <Route key={path} path={path} element={<Component />} />
-        ))}
-      </Routes>
+    <ErrorBoundary fallbackRender={Fallback}>
+      <PaginationProvider>
+        <ThemeProvider theme={theme}>
+          <AppRouting />
+        </ThemeProvider>
+      </PaginationProvider>
     </ErrorBoundary>
   )
 }
