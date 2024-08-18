@@ -5,7 +5,7 @@ import { LoaderStyled } from './Loader.styled'
 export default function Loader() {
   return (
     <LoaderStyled>
-      <img src={images.loader} />
+      <img src={images.loader} alt='loader image' />
     </LoaderStyled>
   )
 }

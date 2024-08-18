@@ -12,20 +12,13 @@ export const theme = {
   },
   font: `Lexend Deca, sans-serif`,
   fontSizes: {
-    xs: '14px', // extra small
-    sm: '16px', // small
-    md: '18px', // medium
-    lg: '24px', // large
-    xl: '32px', // extra large
-    xxl: '35px', // extra extra large
-    xxxl: '64px', // triple extra large
-    /*small: '14px',
-    medium: '16px',
-    large: '18px',
-    smallLarge: '24px',
-    extraLarge: '32px',
-    extraLargeBigger: '35px',
-    extraExtraLarge: '64px',*/
+    xs: '14px',
+    sm: '16px',
+    md: '18px',
+    lg: '24px',
+    xl: '32px',
+    xxl: '35px',
+    xxxl: '64px',
   },
   mixins: {
     flexCenter: `

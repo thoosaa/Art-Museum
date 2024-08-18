@@ -4,7 +4,6 @@ import { MainGalleryProps } from 'types/types'
 import { Gallery } from './MainGallery.styled'
 
 export default function MainGallery({ art_ids }: MainGalleryProps) {
-  console.log('main gallery rendered')
   return (
     <Gallery>
       {art_ids.map((id) => (

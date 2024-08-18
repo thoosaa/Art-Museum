@@ -11,27 +11,40 @@ export default function ArtCardSmall({ art_id }: ArtCardPropsSmall) {
   const { artPieceInfo, isLoading, error } = useArtCard(art_id)
   const navigate = useNavigate()
 
-  return error ? (
-    <p>{error}</p>
-  ) : isLoading ? (
-    <img src={images.loader_image} />
-  ) : (
+  const title = artPieceInfo?.title || ''
+  const artist = artPieceInfo?.artist || ''
+  const avialabilityText = artPieceInfo?.is_public ? 'Public' : 'Copywrite'
+  const imageId = artPieceInfo?.image_id || '0'
+
+  const imgSource = `${IMAGE_URL}/${imageId}/${IMAGE_SIZE}`
+
+  if (error) {
+    return <p>{error}</p>
+  }
+
+  if (isLoading) {
+    return <img src={images.loader_image} alt='loader image' />
+  }
+
+  return (
     <SmallArtBlock onClick={() => navigate(`/art/${art_id}`)}>
       <ArtBlockImage
         alt='Picture'
-        src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
+        src={imgSource}
         onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
         width='80'
         height='80'
         loading='lazy'
       />
+
       <figcaption>
-        <div>
-          <Title>{artPieceInfo?.title}</Title>
-          <Author>{artPieceInfo?.artist}</Author>
-          <Availability>{artPieceInfo?.is_public ? 'Public' : 'Copywrite'}</Availability>
-        </div>
+        <>
+          <Title>{title}</Title>
+          <Author>{artist}</Author>
+          <Availability>{avialabilityText}</Availability>
+        </>
       </figcaption>
+
       <BookmarkButton art_id={art_id} />
     </SmallArtBlock>
   )

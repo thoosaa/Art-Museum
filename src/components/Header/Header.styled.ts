@@ -111,4 +111,30 @@ export const HeaderList = styled.ul`
 export const HeaderStyled = styled.header`
   background: linear-gradient(90deg, #343333 38.05%, #484848 69.22%, #282828 98.98%);
   ${({ theme }) => theme.mixins.flexSpace};
+
+  padding: ${({ theme }) => theme.grid.padding.xs};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.sm};
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.md};
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.lg};
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.xl};
+    }
+  }
 `

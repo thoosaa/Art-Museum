@@ -13,6 +13,7 @@ import {
   Form,
   FormError,
   FormField,
+  Main,
   Section,
   SectionSubtitle,
   SectionTitle,
@@ -29,7 +30,7 @@ export default function Home() {
   return (
     <>
       <Header amountOfLinks={1} />
-      <main className='main'>
+      <Main>
         <Title>
           Let's Find Some <TitleHighlight>Art</TitleHighlight> Here!
         </Title>
@@ -56,13 +57,8 @@ export default function Home() {
         <section>
           <SectionSubtitle>Topics for you</SectionSubtitle>
           <SectionTitle>Our special gallery</SectionTitle>
-          {error ? (
-            <h1 className='page-title'>{error}</h1>
-          ) : isLoading ? (
-            <Loader />
-          ) : (
-            <MainGallery art_ids={art} />
-          )}
+
+          {error ? <Title>{error}</Title> : isLoading ? <Loader /> : <MainGallery art_ids={art} />}
         </section>
 
         <Pagination
@@ -79,7 +75,7 @@ export default function Home() {
           <SectionTitle>Other works for you</SectionTitle>
           <OtherGallery />
         </Section>
-      </main>
+      </Main>
       <Footer />
     </>
   )

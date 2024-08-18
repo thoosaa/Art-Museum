@@ -3,13 +3,20 @@ import FavoritesGallery from '@components/FavoritesGallery/FavoritesGallery'
 import Footer from '@components/Footer/Footer'
 import Header from '@components/Header/Header'
 
-import { Section, SectionSubtitle, SectionTitle, Title, TitleHighlight } from './Favorites.styled'
+import {
+  Main,
+  Section,
+  SectionSubtitle,
+  SectionTitle,
+  Title,
+  TitleHighlight,
+} from './Favorites.styled'
 
 export default function Favorites() {
   return (
     <>
       <Header amountOfLinks={2} />
-      <main className='main'>
+      <Main>
         <Title>
           Here Are Your{' '}
           <TitleHighlight>
@@ -23,7 +30,7 @@ export default function Favorites() {
           <SectionTitle>Your favorites list</SectionTitle>
           <FavoritesGallery />
         </Section>
-      </main>
+      </Main>
       <Footer />
     </>
   )

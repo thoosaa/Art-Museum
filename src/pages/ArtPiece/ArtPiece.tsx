@@ -20,63 +20,73 @@ import {
 
 export default function ArtPiece() {
   const params = useParams<{ artId?: string }>()
-  const { artPieceInfo, isLoading, error } = useArtPiece(params.artId ?? '')
+  const artId = params.artId ?? ''
+  const { artPieceInfo, isLoading, error } = useArtPiece(artId)
+
+  const title = artPieceInfo?.title || ''
+  const artist = artPieceInfo?.artist || ''
+  const imageId = artPieceInfo?.image_id || '0'
+  const dateStart = artPieceInfo?.date_start || ''
+  const dateEnd = artPieceInfo?.date_end || ''
+  const nationality = artPieceInfo?.nationality || ''
+  const dimensions = artPieceInfo?.dimensions || ''
+  const creditLine = artPieceInfo?.credit_line || ''
+  const repository = artPieceInfo?.repository || ''
+  const isPublicText = artPieceInfo?.is_public ? 'Public' : 'Copywrite'
+
+  const imgSource = `${IMAGE_URL}/${imageId}/${IMAGE_SIZE}`
+
+  if (error) {
+    return <Title>{error}</Title>
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <>
       <Header amountOfLinks={2} />
-      {error ? (
-        <h1 className='page-title main'>{error}</h1>
-      ) : isLoading ? (
-        <Loader />
-      ) : (
-        <ArtPieceBlock className='main'>
-          <ArtImage>
-            <img
-              alt='Picture'
-              src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
-              onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
-            />
-            <BookmarkButton
-              art_id={params.artId ?? ''}
-              relative={true}
-              className='bookmark-button'
-            />
-          </ArtImage>
-          <Info>
-            <div>
-              <Title>{artPieceInfo?.title}</Title>
-              <Artist>{artPieceInfo?.artist}</Artist>
-              <Period>
-                {artPieceInfo?.date_start === artPieceInfo?.date_end
-                  ? artPieceInfo?.date_end
-                  : `${artPieceInfo?.date_start}-${artPieceInfo?.date_end}`}
-              </Period>
-            </div>
-            <Overview>
-              <Title>Overview</Title>
-              <p>
-                <YellowHighlight>Artist nationality: </YellowHighlight>
-                {artPieceInfo?.nationality}
-              </p>
-              <p>
-                <YellowHighlight>Dimensions: </YellowHighlight>
-                {artPieceInfo?.dimensions}
-              </p>
-              <p>
-                <YellowHighlight>Credit line: </YellowHighlight>
-                {artPieceInfo?.credit_line}
-              </p>
-              <p>
-                <YellowHighlight>Repository: </YellowHighlight>
-                {artPieceInfo?.repository}
-              </p>
-              <p>{artPieceInfo?.is_public ? 'Public' : 'Copywrite'}</p>
-            </Overview>
-          </Info>
-        </ArtPieceBlock>
-      )}
+      <ArtPieceBlock className='main'>
+        <ArtImage>
+          <img
+            alt='Picture'
+            src={imgSource}
+            onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
+          />
 
+          <BookmarkButton art_id={artId} relative={true} className='bookmark-button' />
+        </ArtImage>
+
+        <Info>
+          <div>
+            <Title>{title}</Title>
+            <Artist>{artist}</Artist>
+            <Period>{dateStart === dateEnd ? dateEnd : `${dateStart}-${dateEnd}`}</Period>
+          </div>
+
+          <Overview>
+            <Title>Overview</Title>
+            <p>
+              <YellowHighlight>Artist nationality: </YellowHighlight>
+              {nationality}
+            </p>
+            <p>
+              <YellowHighlight>Dimensions: </YellowHighlight>
+              {dimensions}
+            </p>
+            <p>
+              <YellowHighlight>Credit line: </YellowHighlight>
+              {creditLine}
+            </p>
+            <p>
+              <YellowHighlight>Repository: </YellowHighlight>
+              {repository}
+            </p>
+            <p>{isPublicText}</p>
+          </Overview>
+        </Info>
+      </ArtPieceBlock>
       <Footer />
     </>
   )

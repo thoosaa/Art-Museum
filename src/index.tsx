@@ -1,5 +1,3 @@
-//import App from './App';
-
 import { App } from '@components/App/App'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'

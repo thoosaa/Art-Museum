@@ -10,9 +10,12 @@ function Header({ amountOfLinks }: HeaderProps) {
   console.log('header rendered')
   const [isOpen, isOverlay, toggle] = useBurgerMenu()
 
+  const hasOverlayStyle = isOverlay ? 'overlay' : ''
+  const hasOpenStyle = isOpen ? 'close' : ''
+
   return (
     <>
-      <HeaderBurgerList className={isOverlay ? 'overlay' : ''}>
+      <HeaderBurgerList className={hasOverlayStyle}>
         {amountOfLinks === 2 ? (
           <HeaderLink src={images.home} link='/' title='Home' isBurger={true} />
         ) : (
@@ -26,10 +29,10 @@ function Header({ amountOfLinks }: HeaderProps) {
         />
       </HeaderBurgerList>
 
-      <HeaderStyled className='header'>
-        <img src={images.museum_logo} alt='Museum logo' className='header__logo' />
+      <HeaderStyled>
+        <img src={images.museum_logo} alt='Museum logo' />
 
-        <HeaderBurger className={isOpen ? 'close' : ''} onClick={toggle}>
+        <HeaderBurger className={hasOpenStyle} onClick={toggle}>
           <span></span>
         </HeaderBurger>
 

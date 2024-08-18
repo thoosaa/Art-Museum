@@ -31,3 +31,32 @@ export const TitleHighlight = styled.span`
 export const Section = styled.section`
   margin-top: 120px;
 `
+
+export const Main = styled.main`
+  margin: 88px 0;
+  padding: ${({ theme }) => theme.grid.padding.xs};
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.sm};
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.md};
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.lg};
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.xl}px) {
+    & {
+      padding: ${({ theme }) => theme.grid.padding.xl};
+    }
+  }
+`

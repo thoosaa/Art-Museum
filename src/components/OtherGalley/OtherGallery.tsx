@@ -5,18 +5,21 @@ import { useArtworks } from '@hooks/useArtworks'
 import { Gallery } from './OtherGallery.styled'
 
 function OtherGallery() {
-  console.log('other gallery rendered')
   const { art, isLoading, error } = useArtworks()
+
+  if (error) {
+    return <h1>{error}</h1>
+  }
+
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <Gallery>
-      {error ? (
-        <h1>{error}</h1>
-      ) : isLoading ? (
-        <Loader />
-      ) : (
-        art.map((id) => <ArtCardSmall art_id={id} key={id} />)
-      )}
+      {art.map((id) => (
+        <ArtCardSmall art_id={id} key={id} />
+      ))}
     </Gallery>
   )
 }
