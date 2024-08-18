@@ -2,11 +2,15 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@components/*": ["./components/*"],
-      "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
+      "@components/*": ["./components/*"],
+      "@constants/*": ["./constants/*"],
+      "@context/*": ["./context/*"],
+      "@hooks/*": ["./hooks/*"],
       "@pages/*": ["./pages/*"],
-      "@context/*": ["./context/*"]
+      "@styles/*": ["./styles/*"],
+      "@types/*": ["./types/*"],
+      "@utils/*": ["./utils/*"]
     },
     "jsx": "react-jsx",
     "target": "ES2015",
@@ -21,6 +25,6 @@
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "main.tsx", "./jest.setup.ts"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "index.tsx", "./jest.setup.ts"],
   "exclude": ["node_modules", "dist"]
 }

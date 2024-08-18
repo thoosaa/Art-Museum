@@ -1,14 +1,14 @@
-import ArtCard from '@components/ArtCard/ArtCard';
-import './MainGallery.scss';
+import ArtCard from '@components/ArtCard/ArtCard'
+import { MainGalleryProps } from 'types/types'
 
-type MainGalleryProps = { art_ids: string[] };
+import { Gallery } from './MainGallery.styled'
 
 export default function MainGallery({ art_ids }: MainGalleryProps) {
   return (
-    <div className="gallery">
+    <Gallery>
       {art_ids.map((id) => (
         <ArtCard art_id={id} key={id} />
       ))}
-    </div>
-  );
+    </Gallery>
+  )
 }

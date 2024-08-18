@@ -1,11 +1,15 @@
-import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall';
+import ArtCardSmall from '@components/ArtCardSmall/ArtCardSmall'
+
+import { Gallery } from './FavoritesGallery.styled'
 
 export default function FavoritesGallery() {
+  const sessionStorageKeys = Object.keys(sessionStorage) || []
+
   return (
-    <div className="other-gallery">
-      {Object.keys(sessionStorage).map((id) => (
+    <Gallery>
+      {sessionStorageKeys.map((id) => (
         <ArtCardSmall art_id={id} key={id} />
       ))}
-    </div>
-  );
+    </Gallery>
+  )
 }

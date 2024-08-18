@@ -1,9 +1,11 @@
-import loader from '@assets/images/loader.svg';
+import { images } from '@assets/images/images'
+
+import { LoaderStyled } from './Loader.styled'
 
 export default function Loader() {
   return (
-    <div className="loader">
-      <img src={loader} className="loader-svg" />
-    </div>
-  );
+    <LoaderStyled>
+      <img src={images.loader} alt='loader image' />
+    </LoaderStyled>
+  )
 }
