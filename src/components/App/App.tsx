@@ -1,3 +1,4 @@
+import GlobalStyle from '@assets/styles/GlobalStyles'
 import Theme from '@assets/styles/Theme'
 import { Fallback } from '@components/Fallback/Fallback'
 import { routes } from '@constants/routes'
@@ -8,6 +9,7 @@ export function App() {
   return (
     <ErrorBoundary fallbackRender={Fallback} onReset={(details) => console.log(details)}>
       <Theme>
+        <GlobalStyle />
         <Routes>
           {routes.map(({ path, component: Component }) => (
             <Route key={path} path={path} element={<Component />} />

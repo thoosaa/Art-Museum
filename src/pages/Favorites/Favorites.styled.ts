@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const SectionTitle = styled.h2`
   text-align: center;
-  font-size: 32px;
+  font-size: ${({ theme }) => theme.fontSizes.xl};
   line-height: 40px;
 `
 export const SectionSubtitle = styled.h3`
@@ -11,7 +11,7 @@ export const SectionSubtitle = styled.h3`
 `
 
 export const Title = styled.h1`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 64, 700)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.xxxl, 700)};
   line-height: 80px;
   text-align: center;
 `

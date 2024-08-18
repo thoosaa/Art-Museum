@@ -8,11 +8,11 @@ export const PaginationStyled = styled.ul`
   flex-wrap: wrap;
 `
 export const PaginationItem = styled.li`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 18, 300)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.md, 300)};
   padding: 7px 0px;
 
   &.active {
-    ${({ theme }) => theme.mixins.font(theme.colors.white, 18, 600)};
+    ${({ theme }) => theme.mixins.font(theme.colors.white, theme.fontSizes.md, 600)};
     background-color: ${({ theme }) => theme.colors.orange};
     padding: 7px 10px;
     border-radius: 5px;

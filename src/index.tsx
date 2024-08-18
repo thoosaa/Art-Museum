@@ -1,5 +1,4 @@
 //import App from './App';
-import '@assets/styles/index.scss'
 
 import { App } from '@components/App/App'
 import { PaginationProvider } from '@context/PageContext/PageContext'

@@ -6,7 +6,7 @@ export const SortButton = styled.button`
   padding: 10px;
   border-radius: 10px;
   margin: 0 auto 100px auto;
-  font-size: 16px;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
   background-color: ${({ theme }) => theme.colors.white};
 
   &.active {
@@ -15,7 +15,7 @@ export const SortButton = styled.button`
 `
 export const SectionTitle = styled.h2`
   text-align: center;
-  font-size: 32px;
+  font-size: ${({ theme }) => theme.fontSizes.xl};
   line-height: 40px;
 `
 export const SectionSubtitle = styled.h3`
@@ -24,7 +24,7 @@ export const SectionSubtitle = styled.h3`
 `
 
 export const Title = styled.h1`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 64, 700)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.xxxl, 700)};
   line-height: 80px;
   text-align: center;
 `
@@ -60,13 +60,12 @@ export const Form = styled.form`
 
 export const FormError = styled.p`
   color: ${({ theme }) => theme.colors.red};
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   display: block;
 `
 
 export const FormField = styled.input`
-  font-size: 14px;
-  font-family: 'Lexend Deca', sans-serif;
+  font-size: ${({ theme }) => theme.fontSizes.xs};
   border: none;
   width: 75%;
   background-color: inherit;

@@ -21,7 +21,7 @@ export const Description = styled.figcaption`
 `
 
 export const Title = styled.p`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 18, 500)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.md, 500)};
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -30,10 +30,10 @@ export const Title = styled.p`
 `
 
 export const Author = styled.p`
-  ${({ theme }) => theme.mixins.font(theme.colors.yellow, 16, 400)};
+  ${({ theme }) => theme.mixins.font(theme.colors.yellow, theme.fontSizes.sm, 400)};
   padding: 3px 0 12px 0;
 `
 
 export const Availability = styled.p`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 16, 700)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.sm, 700)};
 `

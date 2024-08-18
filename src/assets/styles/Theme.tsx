@@ -15,10 +15,20 @@ const theme = {
   },
   font: `Lexend Deca, sans-serif`,
   fontSizes: {
-    small: '14px',
+    xs: '14px', // extra small
+    sm: '16px', // small
+    md: '18px', // medium
+    lg: '24px', // large
+    xl: '32px', // extra large
+    xxl: '35px', // extra extra large
+    xxxl: '64px', // triple extra large
+    /*small: '14px',
     medium: '16px',
     large: '18px',
+    smallLarge: '24px',
     extraLarge: '32px',
+    extraLargeBigger: '35px',
+    extraExtraLarge: '64px',*/
   },
   mixins: {
     flexCenter: `
@@ -38,7 +48,7 @@ const theme = {
     `,
     font: (color: string, size: string, weight: string) => `
       color: ${color};
-      font-size: ${size}px;
+      font-size: ${size};
       font-weight: ${weight};
     `,
   },

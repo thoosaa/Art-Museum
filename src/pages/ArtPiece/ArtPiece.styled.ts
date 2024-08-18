@@ -4,21 +4,21 @@ export const YellowHighlight = styled.span`
   color: ${({ theme }) => theme.colors.yellow};
 `
 export const Title = styled.p`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 32, 400)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.xl, 400)};
   line-height: 40px;
   text-align: left;
   margin-bottom: 16px;
 `
 
 export const Artist = styled.p`
-  ${({ theme }) => theme.mixins.font(theme.colors.yellow, 24, 400)};
+  ${({ theme }) => theme.mixins.font(theme.colors.yellow, theme.fontSizes.lg, 400)};
   line-height: 30px;
   text-align: left;
   margin: 16px 0 16px 0;
 `
 
 export const Period = styled.p`
-  ${({ theme }) => theme.mixins.font(theme.colors.gray, 16, 700)};
+  ${({ theme }) => theme.mixins.font(theme.colors.gray, theme.fontSizes.sm, 700)};
   line-height: 20px;
   text-align: left;
 `
