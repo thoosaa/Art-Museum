@@ -26,6 +26,12 @@ export interface ArtCardPropsSmall {
   art_id: string
 }
 
+export interface BookmarkButtonProps {
+  art_id: string
+  relative?: boolean
+  className?: string
+}
+
 export interface HeaderProps {
   amountOfLinks: number
 }

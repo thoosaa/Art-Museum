@@ -1,17 +1,25 @@
-import './ArtPiece.scss'
-
 import { images } from '@assets/images/images'
+import { BookmarkButton } from '@components/BookmarkButton/BookmarkButton'
 import Footer from '@components/Footer/Footer'
 import Header from '@components/Header/Header'
 import Loader from '@components/Loader/Loader'
 import { IMAGE_SIZE, IMAGE_URL } from '@constants/api_routes'
 import { useArtPiece } from '@hooks/useArtPiece'
-import { useBookmark } from '@hooks/useBookmark'
 import { useParams } from 'react-router-dom'
+
+import {
+  ArtImage,
+  Artist,
+  ArtPieceBlock,
+  Info,
+  Overview,
+  Period,
+  Title,
+  YellowHighlight,
+} from './ArtPiece.styled'
 
 export default function ArtPiece() {
   const params = useParams<{ artId?: string }>()
-  const { bookmarkImg, addRemoveArtPiece } = useBookmark(params.artId ?? '')
   const { artPieceInfo, isLoading, error } = useArtPiece(params.artId ?? '')
 
   return (
@@ -22,52 +30,51 @@ export default function ArtPiece() {
       ) : isLoading ? (
         <Loader />
       ) : (
-        <main className='main art-piece'>
-          <div className='art-piece-image'>
+        <ArtPieceBlock className='main'>
+          <ArtImage>
             <img
               alt='Picture'
               src={`${IMAGE_URL}${artPieceInfo?.image_id}${IMAGE_SIZE}`}
               onError={(e) => (e.currentTarget.src = images.museum_logo_icon)}
             />
-            <button
-              className='art-block__add-bookmark art-piece-bookmark'
-              onClick={addRemoveArtPiece}
-            >
-              <img src={bookmarkImg} alt='Bookmark' width='24' />
-            </button>
-          </div>
-          <div className='art-piece-info'>
-            <div className='art-piece-info__main'>
-              <p className='art-piece__title'>{artPieceInfo?.title}</p>
-              <p className='art-piece-info__artist'>{artPieceInfo?.artist}</p>
-              <p className='art-piece-info__period'>
+            <BookmarkButton
+              art_id={params.artId ?? ''}
+              relative={true}
+              className='bookmark-button'
+            />
+          </ArtImage>
+          <Info>
+            <div>
+              <Title>{artPieceInfo?.title}</Title>
+              <Artist>{artPieceInfo?.artist}</Artist>
+              <Period>
                 {artPieceInfo?.date_start === artPieceInfo?.date_end
                   ? artPieceInfo?.date_end
                   : `${artPieceInfo?.date_start}-${artPieceInfo?.date_end}`}
-              </p>
+              </Period>
             </div>
-            <div className='art-piece-info__overview'>
-              <p className='art-piece__title'>Overview</p>
+            <Overview>
+              <Title>Overview</Title>
               <p>
-                <span className='yellow-highlight'>Artist nationality: </span>
+                <YellowHighlight>Artist nationality: </YellowHighlight>
                 {artPieceInfo?.nationality}
               </p>
               <p>
-                <span className='yellow-highlight'>Dimensions: </span>
+                <YellowHighlight>Dimensions: </YellowHighlight>
                 {artPieceInfo?.dimensions}
               </p>
               <p>
-                <span className='yellow-highlight'>Credit line: </span>
+                <YellowHighlight>Credit line: </YellowHighlight>
                 {artPieceInfo?.credit_line}
               </p>
               <p>
-                <span className='yellow-highlight'>Repository: </span>
+                <YellowHighlight>Repository: </YellowHighlight>
                 {artPieceInfo?.repository}
               </p>
               <p>{artPieceInfo?.is_public ? 'Public' : 'Copywrite'}</p>
-            </div>
-          </div>
-        </main>
+            </Overview>
+          </Info>
+        </ArtPieceBlock>
       )}
 
       <Footer />

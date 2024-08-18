@@ -1,5 +1,3 @@
-import './Home.scss'
-
 import { images } from '@assets/images/images'
 import Footer from '@components/Footer/Footer'
 import Header from '@components/Header/Header'
@@ -11,6 +9,18 @@ import { usePagination } from '@context/PageContext/PageContext'
 import { useSearch } from '@hooks/useSearch'
 import { useValidate } from '@hooks/useValidate'
 
+import {
+  Form,
+  FormError,
+  FormField,
+  Section,
+  SectionSubtitle,
+  SectionTitle,
+  SortButton,
+  Title,
+  TitleHighlight,
+} from './Home.styled'
+
 export default function Home() {
   const { currentPage, isSorted, query, setCurrentPage, setIsSorted } = usePagination()
   const { isLoading, error, art, total } = useSearch()
@@ -20,36 +30,32 @@ export default function Home() {
     <>
       <Header amountOfLinks={1} />
       <main className='main'>
-        <h1 className='page-title'>
-          Let's Find Some <span className='page-title-highlight'>Art</span> Here!
-        </h1>
+        <Title>
+          Let's Find Some <TitleHighlight>Art</TitleHighlight> Here!
+        </Title>
 
-        <form className={`form ${formError ? 'input-error' : ''}`}>
-          <input
+        <Form className={formError ? 'input-error' : ''}>
+          <FormField
             placeholder='Search art, artist, work...'
             type='text'
             name='art'
             value={value || query}
             onChange={onChange}
-            className='form__field'
           />
-          {formError && <p className='form-error'>{formError}</p>}
+          {formError && <FormError>{formError}</FormError>}
           <button type='button'>
             <img src={images.search} alt='Search' />
           </button>
-        </form>
+        </Form>
 
-        <button
-          onClick={() => setIsSorted(!isSorted)}
-          className={`set-sort-button ${isSorted ? 'set-sort-button--active' : ''}`}
-        >
+        <SortButton onClick={() => setIsSorted(!isSorted)} className={isSorted ? 'active' : ''}>
           <img src={images.abc} />
           <p> Sort in alphabetical order</p>
-        </button>
+        </SortButton>
 
         <section>
-          <h3 className='section__subtitle'>Topics for you</h3>
-          <h2 className='section__title'>Our special gallery</h2>
+          <SectionSubtitle>Topics for you</SectionSubtitle>
+          <SectionTitle>Our special gallery</SectionTitle>
           {error ? (
             <h1 className='page-title'>{error}</h1>
           ) : isLoading ? (
@@ -68,11 +74,11 @@ export default function Home() {
           }}
         />
 
-        <section className='section-other-gallery'>
-          <h3 className='section__subtitle'>Here some more</h3>
-          <h2 className='section__title'>Other works for you</h2>
+        <Section>
+          <SectionSubtitle>Here some more</SectionSubtitle>
+          <SectionTitle>Other works for you</SectionTitle>
           <OtherGallery />
-        </section>
+        </Section>
       </main>
       <Footer />
     </>
