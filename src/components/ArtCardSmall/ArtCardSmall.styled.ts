@@ -23,7 +23,7 @@ export const Title = styled.p`
   padding-bottom: 2px;
 `
 
-export const Author = styled.p`
+export const Artist = styled.p`
   ${({ theme }) => theme.mixins.font(theme.colors.yellow, theme.fontSizes.sm, 400)};
   padding: 3px 0 12px 0;
 `

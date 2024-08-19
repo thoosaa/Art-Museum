@@ -5,7 +5,7 @@ import { useArtCard } from '@hooks/useArtCard'
 import { useNavigate } from 'react-router-dom'
 import { ArtCardProps } from 'types/types'
 
-import { ArtBlock, Author, Availability, Description, Title } from './ArtCard.styled'
+import { ArtBlock, Artist, Availability, Description, Title } from './ArtCard.styled'
 
 export default function ArtCard({ art_id }: ArtCardProps) {
   const { artPieceInfo, isLoading, error } = useArtCard(art_id)
@@ -39,7 +39,7 @@ export default function ArtCard({ art_id }: ArtCardProps) {
       <Description>
         <div>
           <Title>{title}</Title>
-          <Author>{artist}</Author>
+          <Artist>{artist}</Artist>
           <Availability>{avialabilityText}</Availability>
         </div>
 
