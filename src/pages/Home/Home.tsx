@@ -66,7 +66,6 @@ export default function Home() {
           currentPage={currentPage}
           onPageChange={(page: number) => {
             setCurrentPage(page)
-            console.log(page)
           }}
         />
 

@@ -10,15 +10,15 @@ export function useBookmark(art_id: string) {
   const addRemoveArtPiece = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation()
+
       if (sessionStorage.has(art_id)) {
-        console.log('remove existing')
         sessionStorage.remove(art_id)
         setBookmarkImg(images.bookmark_orange)
-      } else {
-        console.log('add new')
-        sessionStorage.add(art_id)
-        setBookmarkImg(images.bookmark_orange_fill)
+        return
       }
+
+      sessionStorage.add(art_id)
+      setBookmarkImg(images.bookmark_orange_fill)
     },
     [art_id],
   )
