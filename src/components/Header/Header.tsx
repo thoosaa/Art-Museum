@@ -1,14 +1,23 @@
 import { images } from '@assets/images/images'
 import { HeaderLink } from '@components/HeaderLink/HeaderLink'
 import { useBurgerMenu } from '@hooks/useBurgerMenu'
-import { memo } from 'react'
+import { useScrollLock } from '@hooks/useScrollLock'
+import { memo, useEffect } from 'react'
 import { HeaderProps } from 'types/types'
 
 import { HeaderBurger, HeaderBurgerList, HeaderList, HeaderStyled } from './Header.styled'
 
 function Header({ amountOfLinks }: HeaderProps) {
-  console.log('header rendered')
   const [isOpen, isOverlay, toggle] = useBurgerMenu()
+  const [lockScroll, unlockScroll] = useScrollLock()
+
+  useEffect(() => {
+    if (isOpen) {
+      lockScroll()
+    } else {
+      unlockScroll()
+    }
+  }, [isOpen, lockScroll, unlockScroll])
 
   const hasOverlayStyle = isOverlay ? 'overlay' : ''
   const hasOpenStyle = isOpen ? 'close' : ''

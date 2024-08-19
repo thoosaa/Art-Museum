@@ -3,28 +3,28 @@ import getErrorMessage from '@utils/helperFunctions/getErrorMessage'
 import axios from 'axios'
 import { useCallback, useEffect, useState } from 'react'
 
+const NUMBER_OF_ARTWORKS = 9
+
 export function useArtworks() {
   const [art, setArt] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
-  const numberOfArtworks = 9
-
-  useEffect(() => {
-    fetchArt()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const fetchArt = useCallback(async () => {
     try {
-      setIsLoading(true)
-      const res = await axios.get(`${BASE_URL}?limit=${numberOfArtworks}`)
+      const res = await axios.get(`${BASE_URL}?limit=${NUMBER_OF_ARTWORKS}`)
+
       setArt(res.data.data.map((item: { id: number }) => item.id))
-      setIsLoading(false)
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
       setError(getErrorMessage(error))
+    } finally {
+      setIsLoading(false)
     }
-  }, [error])
+  }, [])
+
+  useEffect(() => {
+    fetchArt()
+  }, [fetchArt])
 
   return { art, isLoading, error }
 }
